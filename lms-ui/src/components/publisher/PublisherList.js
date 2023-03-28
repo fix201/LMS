@@ -17,6 +17,10 @@ export class PublisherList extends React.Component {
         this.isAdding = this.isAdding.bind(this)
     }
 
+    componentDidMount(){
+        PublisherActions.readPublishers();
+    }
+
     isUpdating(publisher) {
         this.setState(publisher);
         this.setState((prevState) => {
@@ -38,6 +42,7 @@ export class PublisherList extends React.Component {
     }
 
     createPublisherRow(publisher, index) {
+        console.log(publisher)
         return (
             <tr key={index}>
                 <td> {index + 1} </td>
@@ -45,6 +50,7 @@ export class PublisherList extends React.Component {
                 <td> {publisher.address} </td>
                 <td> {publisher.phoneNumber} </td>
                 <td> {publisher.email} </td>
+                <td> {publisher.type} </td>
                 <td> {publisher.establishmentDate} </td>
                 <td className="btn-toolbar">
                     <button id="update"
