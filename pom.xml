@@ -23,5 +23,6 @@
 
 	<modules>
 		<module>lms-core</module>
+		<module>lms-ui</module>
 	</modules>
 </project>
