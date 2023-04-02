@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `lms`.`publisher` (
   `email` VARCHAR(45) NULL,
   `type` VARCHAR(45) NOT NULL,
   `establishment_date` DATE NULL,
-  `isbn_prefix` VARCHAR(5) NOT NULL,
+  `isbn_prefix` VARCHAR(5),
   PRIMARY KEY (`id`),
   UNIQUE INDEX `phone_number_unique` (`phone_number` ASC) VISIBLE,
   UNIQUE INDEX `email_unique` (`email` ASC) VISIBLE,

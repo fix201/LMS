@@ -15,6 +15,7 @@ export const fetchPublishers = () => {
 }
 
 export const updatePublisher = (publisher) => {
+    console.log(publisher)
     return (dispatch) => {
         axios.post(`${Config.API}/publisher`, publisher)
             .then((res) => {

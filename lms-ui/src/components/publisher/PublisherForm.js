@@ -51,7 +51,7 @@ export class PublisherForm extends React.Component {
                                     <label htmlFor={"name"}>Publisher Name</label>
                                     <input type="text" className="form-control" name={"name"}
                                            readOnly={showDetails}
-                                           value={showDetails ? publisher?.name : ""}
+                                           defaultValue={showDetails ? publisher?.name : ""}
                                            placeholder={publisher?.name ?? "Enter Publisher Name"}
                                            onChange={this.handleChange} required/>
                                 </div>
@@ -60,30 +60,49 @@ export class PublisherForm extends React.Component {
                                     <label htmlFor={"email"}>Email</label>
                                     <input type="email" className="form-control" name={"email"}
                                            readOnly={showDetails}
-                                           value={showDetails ? publisher?.email : ""}
+                                           defaultValue={showDetails ? publisher?.email : ""}
                                            placeholder={publisher?.email ?? "Enter Publisher Email"}
                                            onChange={this.handleChange}/>
                                 </div>
                                 <br/>
                                 <div className={"form-group"}>
-                                    <label htmlFor={"gender"}>Gender</label>
-                                    <input type="text" className="form-control" name={"gender"}
+                                    <label htmlFor={"phoneNumber"}>Phone</label>
+                                    <input type="text" className="form-control" name={"phoneNumber"}
                                            readOnly={showDetails}
-                                           value={showDetails ? publisher?.gender : ""}
-                                           placeholder={publisher?.gender ?? "Enter Publisher Gender"}
+                                           defaultValue={showDetails ? publisher?.phoneNumber : ""}
+                                           placeholder={publisher?.phoneNumber ?? "Enter Publisher Phone Number"}
                                            onChange={this.handleChange}/>
                                 </div>
                                 <br/>
                                 <div className={"form-group"}>
-                                    <label htmlFor={"dob"}>Birth Date</label>
-                                    <input type={dateInputType} className="form-control" name={"dob"}
+                                    <label htmlFor={"establishmentDate"}>Date of Establishment</label>
+                                    <input type={dateInputType} className="form-control" name={"establishmentDate"}
                                            readOnly={showDetails}
-                                           value={showDetails ? publisher?.dob : ""}
-                                           placeholder={publisher?.dob ?? "Enter Publisher Birth Date"}
+                                           defaultValue={showDetails ? publisher?.establishmentDate : ""}
+                                           placeholder={publisher?.establishmentDate ?? "Enter Publisher Birth Date"}
                                            onChange={this.handleChange}
                                            onBlur={()=> {this.setState({dateInputType: 'text'})}}
                                            onFocus={()=> {this.setState({dateInputType: 'date'})}}/>
                                 </div>
+                                <br/>
+                                <div className={"form-group"}>
+                                    <label htmlFor={"address"}>Address</label>
+                                    <input type="text" className="form-control" name={"address"}
+                                           readOnly={showDetails}
+                                           defaultValue={showDetails ? publisher?.address : ""}
+                                           placeholder={publisher?.address ?? "Enter Publisher Address"}
+                                           onChange={this.handleChange}/>
+                                </div>
+                                <br/>
+                                <div className={"form-group"}>
+                                    <label htmlFor={"type"}>Type</label>
+                                    <input type="text" className="form-control" name={"type"}
+                                           readOnly={showDetails}
+                                           defaultValue={showDetails ? publisher?.type : ""}
+                                           placeholder={publisher?.type ?? "Enter Publisher Type"}
+                                           onChange={this.handleChange}/>
+                                </div>
+                                <br/>
                             </form>
                         </div>
                         <div className="modal-footer">

@@ -55,7 +55,8 @@ export class PublisherList extends React.Component {
             <tr key={index}>
                 <td onClick={() => this.handleView(publisher)}> {index + 1} </td>
                 <td onClick={() => this.handleView(publisher)}> {publisher.name} </td>
-                <td onClick={() => this.handleView(publisher)}> {publisher.gender} </td>
+                <td onClick={() => this.handleView(publisher)}> {publisher.type} </td>
+                <td onClick={() => this.handleView(publisher)}> {publisher.phoneNumber} </td>
                 <td onClick={() => this.handleView(publisher)}> {publisher.email} </td>
                 <td>
                     <button onClick={() => this.handleUpdate(publisher)} className="btn btn-info">Update </button>
@@ -80,7 +81,8 @@ export class PublisherList extends React.Component {
                         <tr>
                             <th>#</th>
                             <th>Name</th>
-                            <th>Gender</th>
+                            <th>Type</th>
+                            <th>Phone</th>
                             <th>Email</th>
                             <th>Actions</th>
                         </tr>

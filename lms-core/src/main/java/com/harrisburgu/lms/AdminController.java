@@ -32,13 +32,12 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/admin")
-@CrossOrigin(origins = "http://localhost:3000")
 public class AdminController {
 
 	private final Logger logger = LoggerFactory.getLogger(AdminController.class);
-	private ReadService readService;
-	private CreateUpdateService createUpdateService;
-	private DeleteService deleteService;
+	private final ReadService readService;
+	private final CreateUpdateService createUpdateService;
+	private final DeleteService deleteService;
 
 	public AdminController(ReadService readService,
 						   CreateUpdateService createUpdateService,
