@@ -9,10 +9,15 @@ export class AuthorList extends React.Component {
         this.state = {
             showAddForm: false,
             showUpdateForm: false,
+            showDetailsForm: false,
             author: null
         }
     }
     
+    handleView = (author) => {
+        this.setState({ author: author, showDetailsForm: true });
+    }
+
     handleUpdate = (author) => {
         this.setState((prevState) => ({ 
             author: author, 
@@ -30,6 +35,7 @@ export class AuthorList extends React.Component {
         this.setState({
             showAddForm: false,
             showUpdateForm: false,
+            showDetailsForm: false,
             author: null
         });
     }
@@ -37,18 +43,23 @@ export class AuthorList extends React.Component {
     handleDelete = (author) => {
         this.props.deleteAuthor(author.id);
     }
+    
+    handleSubmit = (author) => {
+        console.log(author)
+        author?.id ? this.props.updateAuthor(author) : this.props.addAuthor(author);
+        this.resetForm();
+    }
 
     createAuthorRow(author, index) {
         return (
             <tr key={index}>
-                <td> {index + 1} </td>
-                <td> {author.name} </td>
-                <td> {author.gender} </td>
-                <td> {author.email} </td>
+                <td onClick={() => this.handleView(author)}> {index + 1} </td>
+                <td onClick={() => this.handleView(author)}> {author.name} </td>
+                <td onClick={() => this.handleView(author)}> {author.gender} </td>
+                <td onClick={() => this.handleView(author)}> {author.email} </td>
                 <td>
                     <button onClick={() => this.handleUpdate(author)} className="btn btn-info">Update </button>
                     <button style={{marginLeft: "10px"}} onClick={() => this.handleDelete(author)} className="btn btn-danger">Delete </button>
-                    {/*<button style={{marginLeft: "10px"}} onClick={ } className="btn btn-info">View </button>*/}
                 </td>
             </tr>
 
@@ -81,13 +92,26 @@ export class AuthorList extends React.Component {
                 </div>
                 <div>
                     <div>
-                        {this.state.showUpdateForm && <AuthorForm author={this.state.author} 
-                                                                  updateAuthor={this.props.updateAuthor}
-                                                                  onClose={this.resetForm}/>}
+                        {this.state.showUpdateForm && <AuthorForm author={this.state.author}
+                                                                  showUpdateForm={this.state.showUpdateForm}
+                                                                  onSubmit={this.handleSubmit}
+                                                                  onClose={this.resetForm}
+                                                      />
+                        }
                     </div>
                     <div>
-                        {this.state.showAddForm && <AuthorForm updateAuthor={this.props.addAuthor}
-                                                               onClose={this.resetForm}/>}
+                        {this.state.showAddForm && <AuthorForm onSubmit={this.handleSubmit}
+                                                               showAddForm={this.state.showAddForm}
+                                                               onClose={this.resetForm}
+                                                    />
+                        }
+                    </div>
+                    <div>
+                        {this.state.showDetailsForm && <AuthorForm author={this.state.author} 
+                                                                   onClose={() => this.setState({ showDetailsForm: false })}
+                                                                   showDetails={this.state.showDetailsForm}
+                                                        />
+                        }
                     </div>
                 </div>
             </div>

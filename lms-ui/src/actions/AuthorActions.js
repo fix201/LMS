@@ -1,6 +1,5 @@
 import axios from 'axios';
-import AuthorApi from '../api/AuthorApi';
-import {READ_AUTHORS, UPDATE_AUTHOR, ADD_AUTHOR, DELETE_AUTHOR} from "./ActionTypes";
+import {ADD_AUTHOR, DELETE_AUTHOR, READ_AUTHORS, UPDATE_AUTHOR} from "./ActionTypes";
 import Config from "../config";
 
 export const fetchAuthors = () => {
