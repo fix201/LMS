@@ -1,20 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {BookList} from './BookList';
+import { connect } from 'react-redux';
+import { BookList } from './BookList';
 import AppNavbar from "../NavBar";
+import {fetchBooks, updateBook, addBook, deleteBook} from "../../actions/BookActions";
 
-export class Books extends React.Component{
+class Books extends React.Component {
+
+    componentDidMount() {
+        this.props.fetchBooks();
+    }
 
     render() {
-        return(
+        return (
             <div>
                 <AppNavbar />
-                <BookList bookList = {this.props.bookList} />
+                <BookList bookList={this.props.books}
+                            updateBook={this.props.updateBook}
+                            addBook={this.props.addBook}
+                            deleteBook={this.props.deleteBook
+                            }/>
             </div>
         );
     }
 }
 
 Books.propTypes = {
-    bookList: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired
 };
+
+const mapStateToProps = state => {
+    return {
+        books: state.bookReducer.books
+    }
+}
+
+export default connect(mapStateToProps, { fetchBooks, updateBook, addBook, deleteBook })(Books);

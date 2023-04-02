@@ -1,84 +1,132 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import BookActions from "../../actions/BookActions";
+import {BookForm} from './BookForm';
 
 export class BookList extends React.Component {
 
-    componentDidMount(){
-        BookActions.readBooks();
-    }
-    
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            isUpdate: false,
-            isAdd: false,
+            showAddForm: false,
+            showUpdateForm: false,
+            showDetailsForm: false,
             book: null
         }
-        this.isUpdating = this.isUpdating.bind(this)
-        this.isAdding = this.isAdding.bind(this)
     }
 
-    isUpdating(book) {
-        this.setState(book);
-        this.setState((prevState) => {
-            return {
-                isUpdate: !prevState.isUpdate
-            }
-        })
-
+    handleView = (book) => {
+        this.setState({ book: book, showDetailsForm: true });
     }
 
-    isAdding(book) {
-        this.book = book;
-        this.setState((prevState) => {
-            return {
-                isAdd: !prevState.isAdd
-            }
-        })
+    handleUpdate = (book) => {
+        this.setState((prevState) => ({
+            book: book,
+            showUpdateForm: !prevState.showUpdateForm
+        }));
+    };
 
+    handleAdd = () => {
+        this.setState((prevState) => ({
+            showAddForm: !prevState.showAddForm
+        }));
+    }
+
+    resetForm = () => {
+        this.setState({
+            showAddForm: false,
+            showUpdateForm: false,
+            showDetailsForm: false,
+            book: null
+        });
+    }
+
+    handleDelete = (book) => {
+        this.props.deleteBook(book.id);
+    }
+
+    handleSubmit = (book) => {
+        console.log(book)
+        book?.id ? this.props.updateBook(book) : this.props.addBook(book);
+        this.resetForm();
     }
 
     createBookRow(book, index) {
         return (
             <tr key={index}>
-                <td> {index + 1} </td>
-                <td> {book.title} </td>
-                <td> {book.isbn} </td>
-                <td> {book.edition} </td>
-                <td> {book.totalPages} </td>
-                <td> {book.format} </td>
-                <td> {book.language} </td>
+                <td onClick={() => this.handleView(book)}> {index + 1} </td>
+                <td onClick={() => this.handleView(book)}> {book.title} </td>
+                <td onClick={() => this.handleView(book)}> {book.language} </td>
+                <td onClick={() => this.handleView(book)}> {book.publisher.name} </td>
+                <td onClick={() => this.handleView(book)}> {book.isbn} </td>
+                <td>
+                    <button onClick={() => this.handleUpdate(book)} className="btn btn-info">Update </button>
+                    <button style={{marginLeft: "10px"}} onClick={() => this.handleDelete(book)} className="btn btn-danger">Delete </button>
+                </td>
             </tr>
+
         );
     }
 
     render() {
         return (
-            <div>
-                <h1>Books</h1>
-                <table className="table table-hover">
-                    <thead>
+            <div className={"m-3 container"}>
+                <h1 className="text-center">Books</h1>
+                <div className = "row">
+                    <button onClick={() => this.handleAdd()} className="btn btn-primary" > Add Book</button>
+                </div>
+                <br></br>
+                <div className="row">
+                    <table className="table table-hover table-striped table-bordered">
+                        <thead>
                         <tr>
                             <th>#</th>
                             <th>Title</th>
-                            <th>ISBN</th>
-                            <th>Edition</th>
-                            <th>Pages</th>
-                            <th>Format</th>
                             <th>Language</th>
+                            <th>Publisher</th>
+                            <th>ISBN</th>
+                            <th>Actions</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         {this.props.bookList.map(this.createBookRow, this)}
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <div>
+                        {this.state.showUpdateForm && <BookForm book={this.state.book}
+                                                                  showUpdateForm={this.state.showUpdateForm}
+                                                                  onSubmit={this.handleSubmit}
+                                                                  onClose={this.resetForm}
+                        />
+                        }
+                    </div>
+                    <div>
+                        {this.state.showAddForm && <BookForm onSubmit={this.handleSubmit}
+                                                               showAddForm={this.state.showAddForm}
+                                                               onClose={this.resetForm}
+                        />
+                        }
+                    </div>
+                    <div>
+                        {this.state.showDetailsForm && <BookForm book={this.state.book}
+                                                                   onClose={() => this.setState({ showDetailsForm: false })}
+                                                                   showDetails={this.state.showDetailsForm}
+                        />
+                        }
+                    </div>
+                </div>
             </div>
         );
     }
-
 }
 
 BookList.propTypes = {
-    bookList: PropTypes.array.isRequired
+    bookList: PropTypes.array.isRequired,
+    addBook: PropTypes.func.isRequired,
+    updateBook: PropTypes.func.isRequired,
+    deleteBook: PropTypes.func.isRequired
 };
+
+
+

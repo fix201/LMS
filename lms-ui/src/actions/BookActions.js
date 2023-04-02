@@ -1,35 +1,50 @@
-import BookApi from '../api/BookApi';
+import axios from 'axios';
+import {ADD_BOOK, DELETE_BOOK, READ_BOOKS, UPDATE_BOOK} from "./ActionTypes";
+import Config from "../config";
 
-//Here add all crud actions for Books
-
-const BooksActions = {
-    readBooks: function () {
-        BookApi.getAllBooks((bookList) => {
-            // Dispatcher.dispatch({
-            //     actionType: 'read_books',
-            //     data: bookList
-            // })
-        })
-    },
-
-    deleteBook: (bookId) => {
-        BookApi.deleteBook(bookId, (res) => {
-            // Dispatcher.dispatch({
-            //     actionType: 'delete_book',
-            //     status: res
-            // })
-        })
-    },
-
-    updateBook: (book) => {
-        BookApi.updateBook(book, (res) => {
-            // Dispatcher.dispatch({
-            //     actionType: 'update_book',
-            //     status: res
-            // })
-        })
+export const fetchBooks = () => {
+    return (dispatch) => {
+        axios.get(`${Config.API}/books`)
+            .then((res) => {
+                dispatch({type: READ_BOOKS, payload: res.data})
+            })
+            .catch(err => {
+                console.error("Error fetching books:", err)
+            });
     }
-
 }
 
-export default BooksActions;
+export const updateBook = (book) => {
+    return (dispatch) => {
+        axios.post(`${Config.API}/book`, book)
+            .then((res) => {
+                dispatch({type: UPDATE_BOOK, payload: res.data});
+            })
+            .catch(err => {
+                console.error("Error updating book:", err)
+            });
+    }
+}
+
+export const addBook = (book) => {
+    return (dispatch) => {
+        axios.post(`${Config.API}/book`, book)
+            .then((res) => {
+                dispatch({type: ADD_BOOK, payload: res.data});
+            })
+            .catch(err => {
+                console.error("Error adding book:", err)
+            });
+    }
+}
+
+export const deleteBook = (bookId) => {
+    return (dispatch) =>
+        axios.delete(`${Config.API}/book?id=${bookId}`)
+            .then(res => {
+                dispatch({type: DELETE_BOOK, payload: bookId});
+            })
+            .catch(err => {
+                console.error("Unable to delete book:", err)
+            });
+}

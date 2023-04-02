@@ -1,11 +1,11 @@
 import React from 'react';
 
-export class AuthorForm extends React.Component {
+export class BookForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             showModal: true,
-            author: this.props.author,
+            book: this.props.book,
             dateInputType: 'text'
         };
     }
@@ -13,22 +13,22 @@ export class AuthorForm extends React.Component {
     handleChange = (event) => {
         const { name, value } = event.target;
         this.setState((prevState) => ({
-            author: {
-                ...prevState.author,
+            book: {
+                ...prevState.book,
                 [name]: value,
             },
         }));
     }
-    
+
     handleSubmit = (event) => {
         event.preventDefault();
-        this.props.onSubmit(this.state.author);
+        this.props.onSubmit(this.state.book);
     }
 
     render() {
         const { showDetails, showAddForm, showUpdateForm, onClose } = this.props;
         const showModal = showDetails || showUpdateForm || showAddForm;
-        const { author, dateInputType } = this.state;
+        const { book, dateInputType } = this.state;
         return (
             <div className={`modal fade ${showModal ? 'show d-block' : ''}`}
                  tabIndex="-1" role="dialog" data-toggle="modal"
@@ -38,7 +38,7 @@ export class AuthorForm extends React.Component {
                         <div className="modal-header">
                             <h5 className={"modal-title"}>
                                 {
-                                    showDetails ? 'Author Details' : 'Update Author'
+                                    showDetails ? 'Book Details' : 'Update Book'
                                 }
                             </h5>
                             <button type="button" className="btn btn-outline-secondary" onClick={onClose} aria-label="Close">
@@ -48,11 +48,11 @@ export class AuthorForm extends React.Component {
                         <div className="modal-body">
                             <form>
                                 <div className={"form-group"}>
-                                    <label htmlFor={"name"}>Author Name</label>
+                                    <label htmlFor={"name"}>Book Name</label>
                                     <input type="text" className="form-control" name={"name"}
                                            readOnly={showDetails}
-                                           defaultValue={showDetails ? author?.name : ""}
-                                           placeholder={author?.name ?? "Enter Author Name"}
+                                           value={showDetails ? book?.name : ""}
+                                           placeholder={book?.name ?? "Enter Book Name"}
                                            onChange={this.handleChange} required/>
                                 </div>
                                 <br/>
@@ -60,8 +60,8 @@ export class AuthorForm extends React.Component {
                                     <label htmlFor={"email"}>Email</label>
                                     <input type="email" className="form-control" name={"email"}
                                            readOnly={showDetails}
-                                           defaultValue={showDetails ? author?.email : ""}
-                                           placeholder={author?.email ?? "Enter Author Email"}
+                                           value={showDetails ? book?.email : ""}
+                                           placeholder={book?.email ?? "Enter Book Email"}
                                            onChange={this.handleChange}/>
                                 </div>
                                 <br/>
@@ -69,8 +69,8 @@ export class AuthorForm extends React.Component {
                                     <label htmlFor={"gender"}>Gender</label>
                                     <input type="text" className="form-control" name={"gender"}
                                            readOnly={showDetails}
-                                           defaultValue={showDetails ? author?.gender : ""}
-                                           placeholder={author?.gender ?? "Enter Author Gender"}
+                                           value={showDetails ? book?.gender : ""}
+                                           placeholder={book?.gender ?? "Enter Book Gender"}
                                            onChange={this.handleChange}/>
                                 </div>
                                 <br/>
@@ -78,8 +78,8 @@ export class AuthorForm extends React.Component {
                                     <label htmlFor={"dob"}>Birth Date</label>
                                     <input type={dateInputType} className="form-control" name={"dob"}
                                            readOnly={showDetails}
-                                           defaultValue={showDetails ? author?.dob : ""}
-                                           placeholder={author?.dob ?? "Enter Author Birth Date"}
+                                           value={showDetails ? book?.dob : ""}
+                                           placeholder={book?.dob ?? "Enter Book Birth Date"}
                                            onChange={this.handleChange}
                                            onBlur={()=> {this.setState({dateInputType: 'text'})}}
                                            onFocus={()=> {this.setState({dateInputType: 'date'})}}/>
@@ -89,8 +89,8 @@ export class AuthorForm extends React.Component {
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" onClick={onClose}>Close</button>
                             {
-                                showDetails ? 
-                                    (<div />) : 
+                                showDetails ?
+                                    (<div />) :
                                     (<button type="button" className="btn btn-primary" onClick={this.handleSubmit}>
                                         Save changes
                                     </button>)

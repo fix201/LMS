@@ -1,113 +1,129 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import PublisherActions from '../../actions/PublisherActions';
-import {AddPublisherForm} from './AddPublisherForm';
-import {UpdatePublisherForm} from './UpdatePublisherForm';
+import {PublisherForm} from './PublisherForm';
 
 export class PublisherList extends React.Component {
 
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            isUpdate: false,
-            isAdd: false,
+            showAddForm: false,
+            showUpdateForm: false,
+            showDetailsForm: false,
             publisher: null
         }
-        this.isUpdating = this.isUpdating.bind(this)
-        this.isAdding = this.isAdding.bind(this)
     }
 
-    componentDidMount(){
-        PublisherActions.readPublishers();
+    handleView = (publisher) => {
+        this.setState({ publisher: publisher, showDetailsForm: true });
     }
 
-    isUpdating(publisher) {
-        this.setState(publisher);
-        this.setState((prevState) => {
-            return {
-                isUpdate: !prevState.isUpdate
-            }
-        })
+    handleUpdate = (publisher) => {
+        this.setState((prevState) => ({
+            publisher: publisher,
+            showUpdateForm: !prevState.showUpdateForm
+        }));
+    };
 
+    handleAdd = () => {
+        this.setState((prevState) => ({
+            showAddForm: !prevState.showAddForm
+        }));
     }
 
-    isAdding(publisher) {
-        this.publisher = publisher;
-        this.setState((prevState) => {
-            return {
-                isAdd: !prevState.isAdd
-            }
-        })
+    resetForm = () => {
+        this.setState({
+            showAddForm: false,
+            showUpdateForm: false,
+            showDetailsForm: false,
+            publisher: null
+        });
+    }
 
+    handleDelete = (publisher) => {
+        this.props.deletePublisher(publisher.id);
+    }
+
+    handleSubmit = (publisher) => {
+        console.log(publisher)
+        publisher?.id ? this.props.updatePublisher(publisher) : this.props.addPublisher(publisher);
+        this.resetForm();
     }
 
     createPublisherRow(publisher, index) {
-        console.log(publisher)
         return (
             <tr key={index}>
-                <td> {index + 1} </td>
-                <td> {publisher.name} </td>
-                <td> {publisher.address} </td>
-                <td> {publisher.phoneNumber} </td>
-                <td> {publisher.email} </td>
-                <td> {publisher.type} </td>
-                <td> {publisher.establishmentDate} </td>
-                <td className="btn-toolbar">
-                    <button id="update"
-                            className="update btn btn-warning btn-sm"
-                            onClick={() => {
-                                this.isUpdating(publisher)
-                            }}>update
-                    </button>
-                    <button className="btn btn-danger btn-rounded btn-sm buttonDelete"
-                            onClick={() => PublisherActions.deletePublisher(publisher.publisher_id)}>delete
-                    </button>
+                <td onClick={() => this.handleView(publisher)}> {index + 1} </td>
+                <td onClick={() => this.handleView(publisher)}> {publisher.name} </td>
+                <td onClick={() => this.handleView(publisher)}> {publisher.gender} </td>
+                <td onClick={() => this.handleView(publisher)}> {publisher.email} </td>
+                <td>
+                    <button onClick={() => this.handleUpdate(publisher)} className="btn btn-info">Update </button>
+                    <button style={{marginLeft: "10px"}} onClick={() => this.handleDelete(publisher)} className="btn btn-danger">Delete </button>
                 </td>
             </tr>
+
         );
     }
 
     render() {
         return (
-            <div>
-                <h1>Publishers</h1>
-                <table className="table table-hover ">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Address</th>
-                        <th>Phone Number</th>
-                        <th>Email</th>
-                        <th>Type</th>
-                        <th>Date of Establishment</th>
-                        <th>Update / Delete</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {this.props.publisherList.map(this.createPublisherRow, this)}
-                    <tr>
-                        <td>
-                            <button onClick={() => this.isAdding(this.publisher)}>Add</button>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div>
-                    {
-                        this.state.isUpdate && <UpdatePublisherForm publisher={this.state.publisher}/>
-                    }
+            <div className={"m-3 container"}>
+                <h1 className="text-center">Publishers</h1>
+                <div className = "row">
+                    <button onClick={() => this.handleAdd()} className="btn btn-primary" > Add Publisher</button>
                 </div>
-                {
-                    this.state.isAdd && <AddPublisherForm/>
-                }
+                <br></br>
+                <div className="row">
+                    <table className="table table-hover table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Gender</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.props.publisherList.map(this.createPublisherRow, this)}
+                        </tbody>
+                    </table>
+                </div>
+                <div>
+                    <div>
+                        {this.state.showUpdateForm && <PublisherForm publisher={this.state.publisher}
+                                                                  showUpdateForm={this.state.showUpdateForm}
+                                                                  onSubmit={this.handleSubmit}
+                                                                  onClose={this.resetForm}
+                        />
+                        }
+                    </div>
+                    <div>
+                        {this.state.showAddForm && <PublisherForm onSubmit={this.handleSubmit}
+                                                               showAddForm={this.state.showAddForm}
+                                                               onClose={this.resetForm}
+                        />
+                        }
+                    </div>
+                    <div>
+                        {this.state.showDetailsForm && <PublisherForm publisher={this.state.publisher}
+                                                                   onClose={() => this.setState({ showDetailsForm: false })}
+                                                                   showDetails={this.state.showDetailsForm}
+                        />
+                        }
+                    </div>
+                </div>
             </div>
         );
     }
 }
 
 PublisherList.propTypes = {
-    publisherList: PropTypes.array.isRequired
+    publisherList: PropTypes.array.isRequired,
+    addPublisher: PropTypes.func.isRequired,
+    updatePublisher: PropTypes.func.isRequired,
+    deletePublisher: PropTypes.func.isRequired
 };
 
 

@@ -1,20 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {PublisherList} from './PublisherList';
+import { connect } from 'react-redux';
+import { PublisherList } from './PublisherList';
 import AppNavbar from "../NavBar";
+import {fetchPublishers, updatePublisher, addPublisher, deletePublisher} from "../../actions/PublisherActions";
 
-export class Publishers extends React.Component{
+class Publishers extends React.Component {
+
+    componentDidMount() {
+        this.props.fetchPublishers();
+    }
 
     render() {
-        return(
+        return (
             <div>
                 <AppNavbar />
-                <PublisherList publisherList = {this.props.publisherList} />
+                <PublisherList publisherList={this.props.publishers}
+                            updatePublisher={this.props.updatePublisher}
+                            addPublisher={this.props.addPublisher}
+                            deletePublisher={this.props.deletePublisher
+                            }/>
             </div>
         );
     }
 }
 
 Publishers.propTypes = {
-    publisherList: PropTypes.array.isRequired
+    publishers: PropTypes.array.isRequired
 };
+
+const mapStateToProps = state => {
+    return {
+        publishers: state.publisherReducer.publishers
+    }
+}
+
+export default connect(mapStateToProps, { fetchPublishers, updatePublisher, addPublisher, deletePublisher })(Publishers);

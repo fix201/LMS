@@ -1,10 +1,7 @@
 import React from 'react';
-import BookStore from '../stores/BookStore';
-import AuthorStore from '../stores/AuthorStore';
 import AppNavbar from './NavBar';
 import '../styles/Dashboard.css';
 import {LoanRecordList} from "./loans/LoanRecordList";
-import LoanRecordStore from "../stores/LoanRecordStore";
 import {AuthorList} from "./author/AuthorList";
 import {BookList} from "./book/BookList";
 
@@ -42,28 +39,11 @@ export default class Dashboard extends React.Component {
     }
 
     componentDidMount() {
-        BookStore.addChangeListener(this._onBookChange.bind(this), 'BookChange');
-        AuthorStore.addChangeListener(this._onAuthorChange.bind(this), 'AuthorChange');
-        LoanRecordStore.addChangeListener(this._onLoanRecordChange.bind(this), 'LoanRecordChange');
 
     }
 
     componentWillUnmount() {
-        BookStore.removeChangeListener(this._onBookChange.bind(this), 'BookChange');
-        AuthorStore.removeChangeListener(this._onAuthorChange.bind(this), 'AuthorChange');
-        LoanRecordStore.removeChangeListener(this._onLoanRecordChange.bind(this), 'LoanRecordChange');
     }
 
-    _onBookChange() {
-        this.setState({bookList: BookStore.getAllBooks()});
-    }
-
-    _onAuthorChange() {
-        this.setState({authorList: AuthorStore.getAllAuthors()});
-    }
-
-    _onLoanRecordChange() {
-        this.setState({loanRecordList: LoanRecordStore.getAllLoanRecords()})
-    }
 
 }
