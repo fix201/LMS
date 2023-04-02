@@ -66,13 +66,28 @@ export class AuthorList extends React.Component {
         );
     }
 
+    createAuthorDashboardRow(author, index) {
+        return (
+            <tr key={index}>
+                <td> {index + 1} </td>
+                <td> {author.name} </td>
+                <td> {author.gender} </td>
+                <td> {author.email} </td>
+            </tr>
+
+        );
+    }
+
     render() {
         return (
             <div className={"m-3 container"}>
                 <h1 className="text-center">Authors</h1>
-                <div className = "row">
-                    <button onClick={() => this.handleAdd()} className="btn btn-primary" > Add Author</button>
-                </div>
+                {
+                    !this.props?.dashboard &&
+                    <div className = "row">
+                        <button onClick={() => this.handleAdd()} className="btn btn-primary" > Add Author</button>
+                    </div>
+                }
                 <br></br>
                 <div className="row">
                     <table className="table table-hover table-striped table-bordered">
@@ -82,11 +97,15 @@ export class AuthorList extends React.Component {
                                 <th>Name</th>
                                 <th>Gender</th>
                                 <th>Email</th>
-                                <th>Actions</th>
+                                { !this.props?.dashboard && (<th>Actions</th>) }
                             </tr>
                         </thead>
                         <tbody>
-                            {this.props.authorList.map(this.createAuthorRow, this)}
+                            {
+                                this.props?.dashboard ? 
+                                this.props.authorList.map(this.createAuthorDashboardRow, this) :
+                                this.props.authorList.map(this.createAuthorRow, this)
+                            }
                         </tbody>
                     </table>
                 </div>
@@ -121,9 +140,6 @@ export class AuthorList extends React.Component {
 
 AuthorList.propTypes = {
     authorList: PropTypes.array.isRequired,
-    addAuthor: PropTypes.func.isRequired,
-    updateAuthor: PropTypes.func.isRequired,
-    deleteAuthor: PropTypes.func.isRequired
 };
 
 

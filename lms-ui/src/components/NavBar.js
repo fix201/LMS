@@ -13,26 +13,26 @@ const AppNavbar = () => {
             <Collapse isOpen={isOpen} navbar>
                 <Nav navbar>
                     <NavItem>
-                        <NavLink href="/loans">Loan Records</NavLink>
+                        <NavLink tag={Link} to="/loans">Loan Records</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/books">Books</NavLink>
+                        <NavLink tag={Link} to="/books">Books</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/authors">Authors</NavLink>
+                        <NavLink tag={Link} to="/authors">Authors</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/publishers">Publishers</NavLink>
+                        <NavLink tag={Link} to="/publishers">Publishers</NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink href="/genres">Genres</NavLink>
+                        <NavLink tag={Link} to="/genres">Genres</NavLink>
                     </NavItem>
                 </Nav>
             </Collapse>
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="justify-content-end" style={{width: "100%"}} navbar>
                     <NavItem>
-                        <NavLink href="">Log Out</NavLink>
+                        <NavLink tag={Link} to="">Log Out</NavLink>
                     </NavItem>
                 </Nav>
             </Collapse>

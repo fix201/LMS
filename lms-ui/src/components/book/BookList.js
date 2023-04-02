@@ -67,13 +67,27 @@ export class BookList extends React.Component {
         );
     }
 
+    createBookDashboardRow(book, index) {
+        return (
+            <tr key={index}>
+                <td> {index + 1} </td>
+                <td> {book.title} </td>
+                <td> {book.language} </td>
+                <td> {book.publisher.name} </td>
+            </tr>
+        );
+    }
+
     render() {
         return (
             <div className={"m-3 container"}>
                 <h1 className="text-center">Books</h1>
-                <div className = "row">
-                    <button onClick={() => this.handleAdd()} className="btn btn-primary" > Add Book</button>
-                </div>
+                {
+                    !this.props?.dashboard &&
+                    <div className = "row">
+                        <button onClick={() => this.handleAdd()} className="btn btn-primary" > Add Book</button>
+                    </div>
+                }
                 <br></br>
                 <div className="row">
                     <table className="table table-hover table-striped table-bordered">
@@ -83,12 +97,23 @@ export class BookList extends React.Component {
                             <th>Title</th>
                             <th>Language</th>
                             <th>Publisher</th>
-                            <th>ISBN</th>
-                            <th>Actions</th>
+                            {
+                                !this.props?.dashboard &&
+                                (
+                                    <>
+                                        <th>ISBN</th>
+                                        <th>Actions</th>
+                                    </>
+                                )
+                            }
                         </tr>
                         </thead>
                         <tbody>
-                        {this.props.bookList.map(this.createBookRow, this)}
+                        {
+                            this.props?.dashboard ?
+                                this.props.bookList.map(this.createBookDashboardRow, this) :
+                                this.props.bookList.map(this.createBookRow, this)
+                        }
                         </tbody>
                     </table>
                 </div>
@@ -123,9 +148,6 @@ export class BookList extends React.Component {
 
 BookList.propTypes = {
     bookList: PropTypes.array.isRequired,
-    addBook: PropTypes.func.isRequired,
-    updateBook: PropTypes.func.isRequired,
-    deleteBook: PropTypes.func.isRequired
 };
 
 

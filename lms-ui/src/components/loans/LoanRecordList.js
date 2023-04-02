@@ -21,11 +21,11 @@ export class LoanRecordList extends React.Component {
     createLoanRecordRow(loanRecord, index) {
         return (
             <tr key={index}>
-                <td onClick={() => this.handleView(loanRecord)}> {loanRecord.userName} </td>
-                <td onClick={() => this.handleView(loanRecord)}> {loanRecord.branchName} </td>
-                <td onClick={() => this.handleView(loanRecord)}> {loanRecord.bookTitle} </td>
-                <td onClick={() => this.handleView(loanRecord)}> {loanRecord.loanDate} </td>
-                <td onClick={() => this.handleView(loanRecord)}> {loanRecord.dueDate} </td>
+                <td> {loanRecord.userName} </td>
+                <td> {loanRecord.branchName} </td>
+                <td> {loanRecord.bookTitle} </td>
+                <td> {loanRecord.loanDate} </td>
+                <td> {loanRecord.dueDate} </td>
                 {
                     loanRecord?.dateIn ? (
                         <td> {loanRecord.dateIn} </td>
