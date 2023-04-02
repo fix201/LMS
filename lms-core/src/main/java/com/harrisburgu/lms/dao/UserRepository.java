@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 @Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
-	List<User> findByNameContaining(String userName);
+	User findByNameContaining(String userName);
 }

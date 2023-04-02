@@ -7,20 +7,10 @@ import Dashboard from './Dashboard';
 import Books from './book/Books';
 import Authors from './author/Authors';
 import Publishers from './publisher/Publishers';
-import {LoanRecords} from "./loans/LoanRecords";
+import LoanRecords from "./loans/LoanRecords";
 import Genres from "./genre/Genres";
 
 export class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            bookList: [],
-            authorList: [],
-            publisherList: [],
-            genreList: [],
-            loanRecordList: []
-        };
-    }
 
     setIsAuthenticated(isAuthenticated) {
         sessionStorage.setItem('authenticated', isAuthenticated);
@@ -42,11 +32,11 @@ export class App extends React.Component {
                 <BrowserRouter>
                     <Routes>
                         <Route path="/dashboard" element={<Dashboard/>}/>
-                        <Route path="/books" element={<Books bookList={this.state.bookList}/>}/>
-                        <Route path="/authors" element={<Authors authorList={this.state.authorList}/>}/>
-                        <Route path="/loans" element={<LoanRecords loanRecordList={this.state.loanRecordList}/>}/>
-                        <Route path="/genres" element={<Genres genreList={this.state.genreList}/>}/>
-                        <Route path="/publishers" element={<Publishers publisherList={this.state.publisherList}/>}/>
+                        <Route path="/books" element={<Books />}/>
+                        <Route path="/authors" element={<Authors />}/>
+                        <Route path="/loans" element={<LoanRecords />}/>
+                        <Route path="/genres" element={<Genres />}/>
+                        <Route path="/publishers" element={<Publishers />}/>
                         <Route path='*' element={<Dashboard to='/dashboard'/>}/>
                     </Routes>
                 </BrowserRouter>

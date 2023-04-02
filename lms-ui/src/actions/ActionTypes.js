@@ -26,3 +26,4 @@ export const READ_USER = 'READ_USERS';
 export const ADD_USER = 'ADD_USER';
 export const DELETE_USER = 'DELETE_USER';
 export const UPDATE_USER = 'UPDATE_USER';
+export const RESET_LOAN_RECORD_UPDATED = 'RESET_LOAN_RECORD_UPDATED';

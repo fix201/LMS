@@ -621,17 +621,17 @@ INSERT INTO lms.user (name,occupation,gender,phone,email,address) VALUES ('Todd 
 INSERT INTO lms.user (name,occupation,gender,phone,email,address) VALUES ('Dominick George','Dentist','M','7872849405','dominick.george@yahoo.com','83 Van Dyke St.Floral Park, NY 11001');
 
 -- loan_record
-INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (1,1,1,'2019-01-22 00:00:00','2019-01-29 00:00:00','2019-01-29 00:00:00');
-INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (1,2,26,'2019-02-16 00:00:00','2019-02-23 00:00:00','2019-02-22 00:00:00');
-INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (2,2,2,'2019-01-23 00:00:00','2019-01-30 00:00:00','2019-01-30 00:00:00');
-INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (2,6,5,'2019-02-20 00:00:00','2019-02-27 00:00:00','2019-02-21 00:00:00');
-INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (3,2,23,'2019-02-13 00:00:00','2019-02-20 00:00:00','2019-02-20 00:00:00');
-INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (3,3,3,'2019-01-24 00:00:00','2019-01-31 00:00:00','2019-01-29 00:00:00');
-INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (3,9,6,'2019-02-21 00:00:00','2019-02-28 00:00:00','2019-02-27 00:00:00');
-INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (4,3,8,'2019-02-22 00:00:00','2019-03-01 00:00:00','2019-03-01 00:00:00');
-INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (4,4,4,'2019-01-25 00:00:00','2019-02-01 00:00:00','2019-01-28 00:00:00');
-INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (5,4,24,'2019-02-14 00:00:00','2019-02-21 00:00:00','2019-02-20 00:00:00');
-INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (5,5,5,'2019-01-26 00:00:00','2019-02-02 00:00:00','2019-01-28 00:00:00');
+INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date) VALUES (1,1,1,'2019-01-22 00:00:00','2019-01-29 00:00:00');
+INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date) VALUES (1,2,26,'2019-02-16 00:00:00','2019-02-23 00:00:00');
+INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date) VALUES (2,2,2,'2019-01-23 00:00:00','2019-01-30 00:00:00');
+INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date) VALUES (2,6,5,'2019-02-20 00:00:00','2019-02-27 00:00:00');
+INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date) VALUES (3,2,23,'2019-02-13 00:00:00','2019-02-20 00:00:00');
+INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date) VALUES (3,3,3,'2019-01-24 00:00:00','2019-01-31 00:00:00');
+INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date) VALUES (3,9,6,'2019-02-21 00:00:00','2019-02-28 00:00:00');
+INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date) VALUES (4,3,8,'2019-02-22 00:00:00','2019-03-01 00:00:00');
+INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date) VALUES (4,4,4,'2019-01-25 00:00:00','2019-02-01 00:00:00');
+INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date) VALUES (5,4,24,'2019-02-14 00:00:00','2019-02-21 00:00:00');
+INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date) VALUES (5,5,5,'2019-01-26 00:00:00','2019-02-02 00:00:00');
 INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (5,11,23,'2019-02-23 00:00:00','2019-03-02 00:00:00','2019-02-27 00:00:00');
 INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (6,1,25,'2019-02-15 00:00:00','2019-02-22 00:00:00','2019-02-18 00:00:00');
 INSERT INTO lms.loan_record (user_id,library_branch_id,book_id,loan_date,due_date,date_in) VALUES (6,6,6,'2019-01-27 00:00:00','2019-02-03 00:00:00','2019-02-03 00:00:00');

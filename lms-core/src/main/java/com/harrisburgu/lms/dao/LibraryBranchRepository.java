@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Transactional
 public interface LibraryBranchRepository extends JpaRepository<LibraryBranch, Long> {
+	LibraryBranch findByNameContaining(String branchName);
 }

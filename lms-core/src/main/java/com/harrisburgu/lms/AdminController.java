@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -135,7 +137,7 @@ public class AdminController {
 						"bookTitle", readService.getBookById(lr.getBookId()).getTitle(),
 						"loanDate", lr.getLoanDate().toString(),
 						"dueDate", lr.getDueDate().toString(),
-						"dateIn", lr.getDateIn().toString()
+						"dateIn", lr.getDateIn() != null ? lr.getDateIn().toString() : ""
 				)).collect(Collectors.toList());
 	}
 
@@ -197,6 +199,19 @@ public class AdminController {
 	@PostMapping("library/branch/loan")
 	public LoanRecord overrideBookLoan(@RequestBody LoanRecord loanRecord) {
 		return createUpdateService.overrideLoanRecord(loanRecord);
+	}
+
+	@PostMapping("library/branch/loan/checkin")
+	public LoanRecord checkIn(@RequestBody Map<String, String> loanRecord) {
+		Long userId = readService.getUsersByName(loanRecord.get("userName")).getId();
+		Long branchId = readService.getBranchByName(loanRecord.get("branchName")).getId();
+		Long bookId = readService.getBooksByTitle(loanRecord.get("bookTitle")).getId();
+		
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		LocalDateTime loanDate = LocalDateTime.parse(loanRecord.get("loanDate"), formatter);
+		LocalDateTime dateIn = LocalDateTime.now();
+		
+		return createUpdateService.overrideLoanRecord(new LoanRecord(userId, branchId, bookId, loanDate, null, dateIn));
 	}
 
 	@DeleteMapping("/book")

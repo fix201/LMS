@@ -90,10 +90,10 @@ public class ReadService extends BaseService {
 	 * @param title title/name of the book
 	 * @return {@link List} of {@link Book} objects with same or similar title
 	 */
-	public List<Book> getBooksByTitle(String title) {
-		List<Book> books = bookRepo.findBookByTitle(title);
-		logger.info("Books with name {}: {}", title, books);
-		return books;
+	public Book getBooksByTitle(String title) {
+		Book book = bookRepo.findBookByTitle(title);
+		logger.info("Books with name {}: {}", title, book);
+		return book;
 	}
 
 	/**
@@ -186,10 +186,10 @@ public class ReadService extends BaseService {
 	 * @param userName name of the user
 	 * @return {@link List} of {@link User} objects with same or similar name
 	 */
-	public List<User> getUsersByName(String userName) {
-		List<User> users = userRepo.findByNameContaining(userName);
-		logger.info("Users: {}", users);
-		return users;
+	public User getUsersByName(String userName) {
+		User user = userRepo.findByNameContaining(userName);
+		logger.info("User: {}", user);
+		return user;
 	}
 
 	/**
@@ -256,6 +256,17 @@ public class ReadService extends BaseService {
 	}
 
 	/**
+	 * Get library branch by the library branch name
+	 * @param branchName the library branch name
+	 * @return {@link LibraryBranch} object
+	 */
+	public LibraryBranch getBranchByName(String branchName) {
+		LibraryBranch libraryBranch = libraryBranchRepo.findByNameContaining(branchName);
+		logger.info("LibraryBranch with name {}: {}", branchName, libraryBranch);
+		return libraryBranch;
+	}
+
+	/**
 	 * Get user's loan records by their user id
 	 * @param userId the user's id
 	 * @return {@link List} of {@link LoanRecord} objects
@@ -308,5 +319,4 @@ public class ReadService extends BaseService {
 		return loanRecordRepo.findByLoanRecordKeys(loanRecord.getUserId(), loanRecord.getLibraryBranchId(), 
 				loanRecord.getBookId(), loanRecord.getLoanDate());
 	}
-
 }

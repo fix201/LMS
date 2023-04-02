@@ -1,33 +1,45 @@
-import LoanRecordApi from '../api/LoanRecordApi';
+import axios from 'axios';
+import { READ_LOAN_RECORDS, UPDATE_LOAN_RECORD, RESET_LOAN_RECORD_UPDATED} from "./ActionTypes";
+import Config from "../config";
+import { parseISO, format } from 'date-fns';
 
-const LoanRecordsActions = {
-    readLoanRecords: function () {
-        LoanRecordApi.getAllLoanRecords((loanRecordList) => {
-            // Dispatcher.dispatch({
-            //     actionType: 'read_loanRecords',
-            //     data: loanRecordList
-            // })
-        })
-    },
+const formatDateFields = (loanData) => {
+    const dateFormat = 'yyyy-MM-dd HH:mm:ss';
+    return {
+        ...loanData,
+        loanDate: format(parseISO(loanData.loanDate), dateFormat),
+        dueDate: format(parseISO(loanData.dueDate), dateFormat),
+        dateIn: loanData?.dateIn ? format(parseISO(loanData.dateIn), dateFormat) : ""
+    };
+};
 
-    deleteLoanRecord: (loanRecordId) => {
-        LoanRecordApi.deleteLoanRecord(loanRecordId, (res) => {
-            // Dispatcher.dispatch({
-            //     actionType: 'delete_loanRecord',
-            //     status: res
-            // })
-        })
-    },
-
-    updateLoanRecord: (loanRecord) => {
-        LoanRecordApi.updateLoanRecord(loanRecord, (res) => {
-            // Dispatcher.dispatch({
-            //     actionType: 'update_loanRecord',
-            //     status: res
-            // })
-        })
+export const fetchLoanRecords = () => {
+    return (dispatch) => {
+        axios.get(`${Config.API}/library/branches/loans`)
+            .then((res) => {
+                const formattedLoanRecords = res.data.map((loanRecord) => formatDateFields(loanRecord));
+                dispatch({ type: READ_LOAN_RECORDS, payload: formattedLoanRecords });
+            })
+            .catch(err => {
+                console.error("Error fetching loanRecords:", err)
+            });
     }
-
 }
 
-export default LoanRecordsActions;
+export const updateLoanRecord = (loanRecord) => {
+    return (dispatch) => {
+        axios.post(`${Config.API}/library/branch/loan/checkin`, loanRecord)
+            .then((res) => {
+                dispatch({type: UPDATE_LOAN_RECORD, payload: res.data});
+            })
+            .catch(err => {
+                console.error("Error updating loanRecord:", err)
+            });
+    }
+}
+
+export const resetLoanRecordUpdated = () => {
+    return {
+        type: RESET_LOAN_RECORD_UPDATED
+    };
+};

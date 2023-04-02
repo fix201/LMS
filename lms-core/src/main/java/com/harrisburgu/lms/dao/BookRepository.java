@@ -25,7 +25,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 	List<Book> findBookByGenreId(@Param("genreId") Long genreId);
 
 	@Query("select b from Book b where b.title like %:title%")
-	List<Book> findBookByTitle(@Param("title") String title);
+	Book findBookByTitle(@Param("title") String title);
 
 	@Query(SELECT_BOOK_IN + "(select bc.bookId from BookCopy bc where bc.libraryBranchId = :branchId)")
 	List<Book> findAllBookForBranch(@Param("branchId") Long branchId);
