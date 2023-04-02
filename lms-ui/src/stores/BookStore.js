@@ -1,4 +1,3 @@
-import Dispatcher from '../dispatcher/appDispatcher';
 import { EventEmitter } from 'events';
 
 let _bookStore = {
@@ -27,28 +26,28 @@ class BookStoreClass extends EventEmitter {
 
 const BookStore = new BookStoreClass();
 
-Dispatcher.register((action) => {
-
-    switch (action.actionType) {
-        case 'read_books':
-            _bookStore.books = action.data;
-            BookStore.emitChange('BookChange');
-            break;
-        case 'delete_book':
-            _bookStore.books = action.data;
-            BookStore.emitChange('BookEdit');
-            break;
-        case 'update_book':
-            _bookStore.books = action.data;
-            BookStore.emitChange('BookEdit');
-            break;
-        case 'add_book':
-            _bookStore.books = action.data;
-            BookStore.emitChange('BookEdit');
-            break;
-        default:
-            return;
-    }
-});
+// Dispatcher.register((action) => {
+//
+//     switch (action.actionType) {
+//         case 'read_books':
+//             _bookStore.books = action.data;
+//             BookStore.emitChange('BookChange');
+//             break;
+//         case 'delete_book':
+//             _bookStore.books = action.data;
+//             BookStore.emitChange('BookEdit');
+//             break;
+//         case 'update_book':
+//             _bookStore.books = action.data;
+//             BookStore.emitChange('BookEdit');
+//             break;
+//         case 'add_book':
+//             _bookStore.books = action.data;
+//             BookStore.emitChange('BookEdit');
+//             break;
+//         default:
+//             return;
+//     }
+// });
 
 export default BookStore;

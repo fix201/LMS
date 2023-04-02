@@ -1,4 +1,3 @@
-import Dispatcher from '../dispatcher/appDispatcher';
 import {EventEmitter} from 'events';
 
 let _authorStore = {
@@ -27,28 +26,28 @@ class AuthorStoreClass extends EventEmitter{
 
 const AuthorStore = new AuthorStoreClass();
 
-Dispatcher.register( (action) => {
-
-    switch (action.actionType){
-        case 'read_authors':
-            _authorStore.authors = action.data;
-            AuthorStore.emitChange('AuthorChange');
-            break;
-        case 'delete_author':
-            _authorStore.authors = action.data;
-            AuthorStore.emitChange('AuthorDelete');
-            break;
-        case 'update_author':
-            _authorStore.authors = action.data;
-            AuthorStore.emitChange('AuthorUpdate');
-            break;
-        case 'add_author':
-            _authorStore.authors = action.data;
-            AuthorStore.emitChange('AuthorAdd');
-            break;
-        default:
-            return;
-    }
-} );
+// Dispatcher.register( (action) => {
+//
+//     switch (action.actionType){
+//         case 'read_authors':
+//             _authorStore.authors = action.data;
+//             AuthorStore.emitChange('AuthorChange');
+//             break;
+//         case 'delete_author':
+//             _authorStore.authors = action.data;
+//             AuthorStore.emitChange('AuthorDelete');
+//             break;
+//         case 'update_author':
+//             _authorStore.authors = action.data;
+//             AuthorStore.emitChange('AuthorUpdate');
+//             break;
+//         case 'add_author':
+//             _authorStore.authors = action.data;
+//             AuthorStore.emitChange('AuthorAdd');
+//             break;
+//         default:
+//             return;
+//     }
+// } );
 
 export default AuthorStore;

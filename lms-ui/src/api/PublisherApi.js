@@ -3,28 +3,28 @@ import Config from "../config";
 
 const PublisherApi = {
     getAllPublishers: function (cb) {
-        axios.get(Config.api + '/publishers')
+        axios.get(Config.API + '/publishers')
             .then(res => {
                 cb(res.data);
             })
     },
 
     getPublisher: function (publisherId, cb) {
-        axios.get(Config.api + '/publishers/' + publisherId)
+        axios.get(Config.API + '/publishers/' + publisherId)
             .then(res => {
                 cb(res.data);
             })
     },
 
     updatePublisher: (publisher, cb)=> {
-        axios.post(Config.api + '/publisher', publisher)
+        axios.post(Config.API + '/publisher', publisher)
             .then(res => {
                 cb(res.data);
             })
     },
 
     deletePublisher: (publisherId, cb) => {
-        axios.delete(Config.api + '/publisher?id=', publisherId)
+        axios.delete(Config.API + '/publisher?id=', publisherId)
             .then(res => {
                 cb(res.data);
             })

@@ -4,35 +4,35 @@ import Config from "../config";
 const LoanRecordApi = {
 
     getAllLoanRecords: (cb) => {
-        axios.get(Config.api + '/library/branches/loans')
+        axios.get(Config.API + '/library/branches/loans')
             .then(response => {
                 cb(response.data);
             })
     },
 
     getLoanRecordsByBranch: (branchId, cb) => {
-        axios.get(Config.api + '/library/branches/' + branchId + '/loans')
+        axios.get(Config.API + '/library/branches/' + branchId + '/loans')
             .then(res => {
                 cb(res.data);
             })
     },
 
     getLoanRecordsByUser: (userId, cb) => {
-        axios.get(Config.api + '/users/' + userId + '/loans')
+        axios.get(Config.API + '/users/' + userId + '/loans')
             .then(res => {
                 cb(res.data);
             })
     },
 
     updateLoanRecord: (loanRecord, cb) => {
-        axios.post(Config.api + '/library/branch/loan', loanRecord)
+        axios.post(Config.API + '/library/branch/loan', loanRecord)
             .then(res => {
                 cb(res.data);
             })
     },
 
     deleteLoanRecord: (loanRecordId, cb) => {
-        axios.delete(Config.api + '/loanRecord?id=', loanRecordId)
+        axios.delete(Config.API + '/loanRecord?id=', loanRecordId)
             .then(res => {
                 cb(res.data);
             })

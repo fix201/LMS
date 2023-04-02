@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Login from "./Login";
 import Dashboard from './Dashboard';
 import {Books} from './book/Books.js';
-import {Authors} from './author/Authors.js';
+import Authors from './author/Authors.js';
 import {Publishers} from './publisher/Publishers.js';
 import {LoanRecords} from "./loans/LoanRecords";
 import {Genres} from "./genre/Genres";
@@ -43,7 +43,7 @@ export class App extends React.Component {
         }
 
         return (
-            <div className="App">
+            <div>
                 <BrowserRouter>
                     <Routes>
                         <Route path="/dashboard" element={<Dashboard/>}/>

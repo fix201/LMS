@@ -1,35 +1,51 @@
-
+import axios from 'axios';
 import AuthorApi from '../api/AuthorApi';
-import Dispatcher from '../dispatcher/appDispatcher';
+import {READ_AUTHORS, UPDATE_AUTHOR, ADD_AUTHOR, DELETE_AUTHOR} from "./ActionTypes";
+import Config from "../config";
 
-const AuthorsActions = {
-    readAuthors: function () {
-        AuthorApi.getAllAuthors((authorList) => {
-            Dispatcher.dispatch({
-                actionType: 'read_authors',
-                data: authorList
+export const fetchAuthors = () => {
+    return (dispatch) => {
+        axios.get(`${Config.API}/authors`)
+            .then((res) => {
+                dispatch({type: READ_AUTHORS, payload: res.data})
             })
-        })
-    },
-
-    deleteAuthor: (authorId) => {
-        AuthorApi.deleteAuthor(authorId, (res) => {
-            Dispatcher.dispatch({
-                actionType: 'delete_author',
-                status: res
-            })
-        })
-    },
-
-    updateAuthor: (author) => {
-        AuthorApi.updateAuthor(author, (res) => {
-            Dispatcher.dispatch({
-                actionType: 'update_author',
-                status: res
-            })
-        })
+            .catch(err => {
+                console.error("Error fetching authors:", err)
+            });
     }
-
 }
 
-export default AuthorsActions;
+export const updateAuthor = (author) => {
+    return (dispatch) => {
+        axios.post(`${Config.API}/author`, author)
+            .then((res) => {
+                dispatch({type: UPDATE_AUTHOR, payload: res.data});
+            })
+            .catch(err => {
+                console.error("Error updating author:", err)
+            });
+    }
+}
+
+export const addAuthor = (author) => {
+    return (dispatch) => {
+        axios.post(`${Config.API}/author`, author)
+            .then((res) => {
+                dispatch({type: ADD_AUTHOR, payload: res.data});
+            })
+            .catch(err => {
+                console.error("Error adding author:", err)
+            });
+    }
+}
+
+export const deleteAuthor = (authorId) => {
+    return (dispatch) => 
+        axios.delete(`${Config.API}/author?id=${authorId}`)
+            .then(res => {
+                dispatch({type: DELETE_AUTHOR, payload: authorId});
+            })
+            .catch(err => {
+                console.error("Unable to delete author:", err)
+            });
+}

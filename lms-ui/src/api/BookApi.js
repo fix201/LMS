@@ -3,25 +3,25 @@ import Config from "../config";
 
 const BookApi = {
     getAllBooks: function (cb) {
-        axios.get(Config.api + '/books')
+        axios.get(Config.API + '/books')
             .then(res => {
                 cb(res.data);
             })
     },
 
     getBook: async function (bookId, cb) {
-        return await axios.get(Config.api + '/books/' + bookId);
+        return await axios.get(Config.API + '/books/' + bookId);
     },
 
     updateBook: (book, cb)=> {
-        axios.post(Config.api + '/book', book)
+        axios.post(Config.API + '/book', book)
             .then(res => {
                 cb(res.data);
             })
     },
 
     deleteBook: (bookId, cb) => {
-        axios.delete(Config.api + '/book?id=', bookId)
+        axios.delete(Config.API + '/book?id=', bookId)
             .then(res => {
                 cb(res.data);
             })

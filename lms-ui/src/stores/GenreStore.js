@@ -1,4 +1,3 @@
-import Dispatcher from '../dispatcher/appDispatcher';
 import { EventEmitter } from 'events';
 
 let _genreStore = {
@@ -27,28 +26,28 @@ class GenreStoreClass extends EventEmitter {
 
 const GenreStore = new GenreStoreClass();
 
-Dispatcher.register((action) => {
-
-    switch (action.actionType) {
-        case 'read_genres':
-            _genreStore.genres = action.data;
-            GenreStore.emitChange('GenreChange');
-            break;
-        case 'delete_genre':
-            _genreStore.genres = action.data;
-            GenreStore.emitChange('GenreEdit');
-            break;
-        case 'update_genre':
-            _genreStore.genres = action.data;
-            GenreStore.emitChange('GenreEdit');
-            break;
-        case 'add_genre':
-            _genreStore.genres = action.data;
-            GenreStore.emitChange('GenreEdit');
-            break;
-        default:
-            return;
-    }
-});
+// Dispatcher.register((action) => {
+//
+//     switch (action.actionType) {
+//         case 'read_genres':
+//             _genreStore.genres = action.data;
+//             GenreStore.emitChange('GenreChange');
+//             break;
+//         case 'delete_genre':
+//             _genreStore.genres = action.data;
+//             GenreStore.emitChange('GenreEdit');
+//             break;
+//         case 'update_genre':
+//             _genreStore.genres = action.data;
+//             GenreStore.emitChange('GenreEdit');
+//             break;
+//         case 'add_genre':
+//             _genreStore.genres = action.data;
+//             GenreStore.emitChange('GenreEdit');
+//             break;
+//         default:
+//             return;
+//     }
+// });
 
 export default GenreStore;
