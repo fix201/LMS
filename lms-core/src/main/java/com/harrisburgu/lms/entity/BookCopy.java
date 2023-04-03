@@ -20,6 +20,7 @@ import java.io.Serializable;
 @Setter
 @EqualsAndHashCode
 @ToString
+@Builder
 public class BookCopy {
     
     @Id

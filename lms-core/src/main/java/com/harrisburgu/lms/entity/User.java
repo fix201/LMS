@@ -18,6 +18,7 @@ import lombok.ToString;
 @Setter
 @EqualsAndHashCode
 @ToString
+@Builder
 public class User {
 
     @Id

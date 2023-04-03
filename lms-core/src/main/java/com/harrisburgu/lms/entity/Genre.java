@@ -22,6 +22,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode
 @ToString
+@Builder
 public class Genre {
 
     @Id

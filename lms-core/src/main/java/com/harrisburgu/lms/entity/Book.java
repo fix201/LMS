@@ -10,12 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -23,6 +18,8 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor @AllArgsConstructor
 @Getter @Setter @EqualsAndHashCode @ToString
+@Data
+@Builder
 public class Book {
 
     @Id
@@ -55,4 +52,5 @@ public class Book {
             inverseJoinColumns = {@JoinColumn(name = "genreId")})
     @JsonIgnore
     private Set<Genre> genres;
+
 }

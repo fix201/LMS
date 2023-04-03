@@ -22,6 +22,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode
 @ToString
+@Builder
 public class LibraryBranch {
 
     @Id
