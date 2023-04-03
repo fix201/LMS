@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { PublisherList } from './PublisherList';
-import AppNavbar from "../NavBar";
 import {fetchPublishers, updatePublisher, addPublisher, deletePublisher} from "../../actions/PublisherActions";
 
 class Publishers extends React.Component {
@@ -14,7 +13,6 @@ class Publishers extends React.Component {
     render() {
         return (
             <div>
-                <AppNavbar />
                 <PublisherList publisherList={this.props.publishers}
                             updatePublisher={this.props.updatePublisher}
                             addPublisher={this.props.addPublisher}

@@ -1,5 +1,4 @@
 import React from 'react';
-import AppNavbar from './NavBar';
 import '../styles/Dashboard.css';
 import {LoanRecordList} from "./loans/LoanRecordList";
 import {AuthorList} from "./author/AuthorList";
@@ -7,8 +6,7 @@ import {BookList} from "./book/BookList";
 import { connect } from 'react-redux';
 import {fetchAuthors} from "../actions/AuthorActions";
 import {fetchBooks} from "../actions/BookActions";
-import {fetchLoanRecords, updateLoanRecord} from "../actions/LoanRecordActions";
-
+import {fetchLoanRecords} from "../actions/LoanRecordActions";
 
 class Dashboard extends React.Component {
 
@@ -27,7 +25,6 @@ class Dashboard extends React.Component {
         const loanRecordList = this.props.loanRecordList?.slice(0, 5);
         return (
             <div>
-                <AppNavbar />
                 <div className="container mt-2 dashboard">
                     <div className="items">
                         <BookList bookList={books} dashboard={true} />

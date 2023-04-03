@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { GenreList } from './GenreList';
-import AppNavbar from "../NavBar";
 import {fetchGenres, updateGenre, addGenre, deleteGenre} from "../../actions/GenreActions";
 
 class Genres extends React.Component {
@@ -14,7 +13,6 @@ class Genres extends React.Component {
     render() {
         return (
             <div>
-                <AppNavbar />
                 <GenreList genreList={this.props.genres}
                             updateGenre={this.props.updateGenre}
                             addGenre={this.props.addGenre}

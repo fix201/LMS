@@ -133,5 +133,6 @@ function getToken(credentials) {
 }
 
 Login.propTypes = {
-    setIsAuthenticated: PropTypes.func.isRequired
+    setIsAuthenticated: PropTypes.func.isRequired,
+    handleLogout: PropTypes.func.isRequired
 }

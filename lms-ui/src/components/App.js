@@ -9,8 +9,15 @@ import Authors from './author/Authors';
 import Publishers from './publisher/Publishers';
 import LoanRecords from "./loans/LoanRecords";
 import Genres from "./genre/Genres";
+import AppNavbar from "./NavBar";
 
-export class App extends React.Component {
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.setIsAuthenticated = this.setIsAuthenticated.bind(this);
+        this.getIsAuthenticated = this.getIsAuthenticated.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
+    }
 
     setIsAuthenticated(isAuthenticated) {
         sessionStorage.setItem('authenticated', isAuthenticated);
@@ -20,16 +27,22 @@ export class App extends React.Component {
         return sessionStorage.getItem('authenticated');
     }
 
+    handleLogout() {
+        sessionStorage.removeItem('authenticated');
+        window.location.reload(false);
+    }
+
     render() {
         const isAuthenticated = this.getIsAuthenticated();
 
         if (!isAuthenticated) {
-            return <Login setIsAuthenticated={this.setIsAuthenticated}/>
+            return <Login setIsAuthenticated={this.setIsAuthenticated} handleLogout={this.handleLogout}/>
         }
 
         return (
             <div>
                 <BrowserRouter>
+                    <AppNavbar handleLogout={this.handleLogout}/>
                     <Routes>
                         <Route path="/dashboard" element={<Dashboard/>}/>
                         <Route path="/books" element={<Books />}/>
@@ -44,3 +57,5 @@ export class App extends React.Component {
         );
     }
 }
+
+export default App;

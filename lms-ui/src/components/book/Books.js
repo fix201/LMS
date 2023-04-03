@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { BookList } from './BookList';
-import AppNavbar from "../NavBar";
 import {fetchBooks, updateBook, addBook, deleteBook} from "../../actions/BookActions";
 
 class Books extends React.Component {
@@ -14,7 +13,6 @@ class Books extends React.Component {
     render() {
         return (
             <div>
-                <AppNavbar />
                 <BookList bookList={this.props.books}
                             updateBook={this.props.updateBook}
                             addBook={this.props.addBook}

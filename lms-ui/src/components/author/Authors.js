@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { AuthorList } from './AuthorList';
-import AppNavbar from "../NavBar";
 import {fetchAuthors, updateAuthor, addAuthor, deleteAuthor} from "../../actions/AuthorActions";
 
 class Authors extends React.Component {
@@ -14,7 +13,6 @@ class Authors extends React.Component {
     render() {
         return (
             <div>
-                <AppNavbar />
                 <AuthorList authorList={this.props.authors} 
                             updateAuthor={this.props.updateAuthor}  
                             addAuthor={this.props.addAuthor}

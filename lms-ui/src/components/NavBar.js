@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-const AppNavbar = () => {
+const AppNavbar = ({handleLogout}) => {
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -32,7 +32,7 @@ const AppNavbar = () => {
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="justify-content-end" style={{width: "100%"}} navbar>
                     <NavItem>
-                        <NavLink tag={Link} to="">Log Out</NavLink>
+                        <NavLink tag={Link} onClick={handleLogout}>Log Out</NavLink>
                     </NavItem>
                 </Nav>
             </Collapse>
