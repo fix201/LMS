@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 @Transactional
 public interface PublisherRepository extends JpaRepository<Publisher, Long> {
-	public List<Publisher> findByNameContaining (String name);
+	List<Publisher> findByNameContaining (String name);
 }

@@ -12,21 +12,9 @@ import com.harrisburgu.lms.dao.LibraryBranchRepository;
 import com.harrisburgu.lms.dao.LoanRecordRepository;
 import com.harrisburgu.lms.dao.PublisherRepository;
 import com.harrisburgu.lms.dao.UserRepository;
-import com.harrisburgu.lms.entity.Author;
-import com.harrisburgu.lms.entity.Book;
-import com.harrisburgu.lms.entity.BookCopy;
-import com.harrisburgu.lms.entity.Genre;
-import com.harrisburgu.lms.entity.Librarian;
-import com.harrisburgu.lms.entity.LibraryBranch;
-import com.harrisburgu.lms.entity.LoanRecord;
-import com.harrisburgu.lms.entity.Publisher;
-import com.harrisburgu.lms.entity.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service

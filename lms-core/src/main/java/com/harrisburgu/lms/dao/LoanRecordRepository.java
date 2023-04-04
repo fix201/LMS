@@ -1,9 +1,6 @@
 package com.harrisburgu.lms.dao;
 
-import com.harrisburgu.lms.entity.Book;
-import com.harrisburgu.lms.entity.LibraryBranch;
 import com.harrisburgu.lms.entity.LoanRecord;
-import com.harrisburgu.lms.entity.User;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

@@ -18,8 +18,8 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserController {
 
-	private ReadService readService;
-	private CreateUpdateService createUpdateService;
+	private final ReadService readService;
+	private final CreateUpdateService createUpdateService;
 
 	public UserController(ReadService readService,
 						  CreateUpdateService createUpdateService) {

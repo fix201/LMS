@@ -14,5 +14,5 @@ import java.util.List;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 	
 	@Query("select a from Author a where a.name like %:name%")
-	public List<Author> findAuthorByName(@Param("name") String name);
+	List<Author> findAuthorByName(@Param("name") String name);
 }

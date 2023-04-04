@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 @Transactional
 public interface GenreRepository extends JpaRepository<Genre, Long> {
-	public List<Genre> findByGenreNameContaining (String genreName);
+	List<Genre> findByGenreNameContaining (String genreName);
 }
