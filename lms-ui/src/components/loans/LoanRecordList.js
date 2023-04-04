@@ -28,7 +28,14 @@ export class LoanRecordList extends React.Component {
                     loanRecord?.dateIn ? (
                         <td> {loanRecord.dateIn} </td>
                     ) : (
-                        <td><button onClick={() => this.handleUpdate(loanRecord)} className="btn btn-info">Check In</button></td>
+                        <td>
+                            {!this.props?.dashboard && 
+                                <button onClick={() => this.handleUpdate(loanRecord)} 
+                                        className="btn btn-info btn-sm">
+                                    Check In
+                                </button>
+                            }
+                        </td>
                     )
                 }
             </tr>
@@ -63,6 +70,5 @@ export class LoanRecordList extends React.Component {
 }
 
 LoanRecordList.propTypes = {
-    loanRecordList: PropTypes.array.isRequired,
-    updateLoanRecord: PropTypes.func.isRequired
+    loanRecordList: PropTypes.array.isRequired
 };
