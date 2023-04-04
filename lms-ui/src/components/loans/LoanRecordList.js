@@ -14,7 +14,7 @@ export class LoanRecordList extends React.Component {
 
     handleUpdate = (loanRecord) => {
         this.props.updateLoanRecord(loanRecord);
-        window.location.reload();
+        // window.location.reload();
         
     };
 
@@ -30,7 +30,7 @@ export class LoanRecordList extends React.Component {
                     loanRecord?.dateIn ? (
                         <td> {loanRecord.dateIn} </td>
                     ) : (
-                        <td><button onClick={() => this.handleUpdate(loanRecord)} className="btn btn-info">Check In </button></td>
+                        <td><button onClick={() => this.handleUpdate(loanRecord)} className="btn btn-info">Check In</button></td>
                     )
                 }
             </tr>

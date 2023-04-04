@@ -12,7 +12,7 @@ class Publishers extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="d-flex justify-content-center align-items-center">
                 <PublisherList publisherList={this.props.publishers}
                             updatePublisher={this.props.updatePublisher}
                             addPublisher={this.props.addPublisher}

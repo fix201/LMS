@@ -12,7 +12,7 @@ class Books extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="d-flex justify-content-center align-items-center">
                 <BookList bookList={this.props.books}
                             updateBook={this.props.updateBook}
                             addBook={this.props.addBook}

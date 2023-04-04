@@ -11,7 +11,7 @@ class LoanRecords extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="d-flex justify-content-center align-items-center">
                 <LoanRecordList loanRecordList={this.props.loanRecordList}
                                 updateLoanRecord={this.props.updateLoanRecord}/>
             </div>

@@ -12,7 +12,7 @@ class Authors extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="d-flex justify-content-center align-items-center">
                 <AuthorList authorList={this.props.authors} 
                             updateAuthor={this.props.updateAuthor}  
                             addAuthor={this.props.addAuthor}

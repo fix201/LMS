@@ -12,7 +12,7 @@ class Genres extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="d-flex justify-content-center align-items-center">
                 <GenreList genreList={this.props.genres}
                             updateGenre={this.props.updateGenre}
                             addGenre={this.props.addGenre}
