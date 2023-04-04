@@ -45,7 +45,6 @@ export class BookList extends React.Component {
     }
 
     handleSubmit = (book) => {
-        console.log(book)
         book?.id ? this.props.updateBook(book) : this.props.addBook(book);
         this.resetForm();
     }

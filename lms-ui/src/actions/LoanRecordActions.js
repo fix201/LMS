@@ -1,7 +1,7 @@
 import axios from 'axios';
-import { READ_LOAN_RECORDS, UPDATE_LOAN_RECORD, RESET_LOAN_RECORD_UPDATED} from "./ActionTypes";
+import {READ_LOAN_RECORDS, UPDATE_LOAN_RECORD} from "./ActionTypes";
 import Config from "../config";
-import { parseISO, format } from 'date-fns';
+import {parseISO, format} from 'date-fns';
 
 const formatDateFields = (loanData) => {
     const dateFormat = 'yyyy-MM-dd HH:mm:ss';
@@ -18,7 +18,7 @@ export const fetchLoanRecords = () => {
         axios.get(`${Config.API}/library/branches/loans`)
             .then((res) => {
                 const formattedLoanRecords = res.data.map((loanRecord) => formatDateFields(loanRecord));
-                dispatch({ type: READ_LOAN_RECORDS, payload: formattedLoanRecords });
+                dispatch({type: READ_LOAN_RECORDS, payload: formattedLoanRecords});
             })
             .catch(err => {
                 console.error("Error fetching loanRecords:", err)
@@ -37,9 +37,3 @@ export const updateLoanRecord = (loanRecord) => {
             });
     }
 }
-
-export const resetLoanRecordUpdated = () => {
-    return {
-        type: RESET_LOAN_RECORD_UPDATED
-    };
-};

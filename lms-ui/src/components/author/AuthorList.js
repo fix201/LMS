@@ -45,7 +45,6 @@ export class AuthorList extends React.Component {
     }
     
     handleSubmit = (author) => {
-        console.log(author)
         author?.id ? this.props.updateAuthor(author) : this.props.addAuthor(author);
         this.resetForm();
     }

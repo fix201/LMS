@@ -14,8 +14,6 @@ export class LoanRecordList extends React.Component {
 
     handleUpdate = (loanRecord) => {
         this.props.updateLoanRecord(loanRecord);
-        // window.location.reload();
-        
     };
 
     createLoanRecordRow(loanRecord, index) {
@@ -65,5 +63,6 @@ export class LoanRecordList extends React.Component {
 }
 
 LoanRecordList.propTypes = {
-    loanRecordList: PropTypes.array.isRequired
+    loanRecordList: PropTypes.array.isRequired,
+    updateLoanRecord: PropTypes.func.isRequired
 };

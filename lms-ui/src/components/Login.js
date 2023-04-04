@@ -16,7 +16,6 @@ export default function Login({setIsAuthenticated}) {
     const handleSubmit = e => {
         e.preventDefault();
         const token = getToken({email, password});
-        console.log(token);
         setIsAuthenticated(token);
         window.location.reload(false);
     }

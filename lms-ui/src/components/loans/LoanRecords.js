@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {LoanRecordList} from './LoanRecordList';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {fetchLoanRecords, updateLoanRecord} from "../../actions/LoanRecordActions";
 
 class LoanRecords extends React.Component {
@@ -19,11 +20,15 @@ class LoanRecords extends React.Component {
     }
 }
 
+LoanRecords.propTypes = {
+    loanRecordList: PropTypes.array.isRequired
+}
+
 const mapStateToProps = state => {
     return {
         loanRecordList: state.loanRecordReducer.loanRecords
     }
 }
 
-export default connect(mapStateToProps, { fetchLoanRecords, updateLoanRecord })(LoanRecords);
+export default connect(mapStateToProps, {fetchLoanRecords, updateLoanRecord})(LoanRecords);
 

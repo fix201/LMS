@@ -5,18 +5,22 @@ const initialState = {
 };
 
 const loanRecordReducer = (state = initialState, action) => {
-    switch (action.type) { 
+    switch (action.type) {
         case actionTypes.READ_LOAN_RECORDS:
             return {
                 ...state,
                 loanRecords: action.payload
             };
         case actionTypes.UPDATE_LOAN_RECORD: {
-            const updatedLoanRecords = [...state.loanRecords];
-            updatedLoanRecords[action.payload.index] = action.payload.data;
             return {
                 ...state,
-                loanRecords: updatedLoanRecords
+                loanRecords: state.loanRecords.map((lr) =>
+                    lr.userName === action.payload.userName &&
+                    lr.branchName === action.payload.branchName &&
+                    lr.bookTitle === action.payload.bookTitle &&
+                    lr.loanDate === action.payload.loanDate ?
+                        action.payload : lr
+                )
             };
         }
         case actionTypes.ADD_LOAN_RECORD:

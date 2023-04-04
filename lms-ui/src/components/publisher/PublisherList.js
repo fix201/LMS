@@ -45,7 +45,6 @@ export class PublisherList extends React.Component {
     }
 
     handleSubmit = (publisher) => {
-        console.log(publisher)
         publisher?.id ? this.props.updatePublisher(publisher) : this.props.addPublisher(publisher);
         this.resetForm();
     }

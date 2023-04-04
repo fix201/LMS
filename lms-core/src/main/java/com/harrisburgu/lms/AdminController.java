@@ -199,7 +199,7 @@ public class AdminController {
 	}
 
 	@PostMapping("library/branch/loan/checkin")
-	public LoanRecord checkIn(@RequestBody Map<String, String> loanRecord) {
+	public Map<String, String> checkIn(@RequestBody Map<String, String> loanRecord) {
 		Long userId = readService.getUsersByName(loanRecord.get("userName")).getId();
 		Long branchId = readService.getBranchByName(loanRecord.get("branchName")).getId();
 		Long bookId = readService.getBooksByTitle(loanRecord.get("bookTitle")).getId();
@@ -208,7 +208,13 @@ public class AdminController {
 		LocalDateTime loanDate = LocalDateTime.parse(loanRecord.get("loanDate"), formatter);
 		LocalDateTime dateIn = LocalDateTime.now();
 		
-		return createUpdateService.overrideLoanRecord(new LoanRecord(userId, branchId, bookId, loanDate, null, dateIn));
+		LoanRecord lr = new LoanRecord(userId, branchId, bookId, loanDate, null, dateIn);
+		lr = createUpdateService.overrideLoanRecord(lr);
+		
+		loanRecord.put("dueDate", lr.getDueDate().format(formatter));
+		loanRecord.put("dateIn", lr.getDateIn().format(formatter));
+		
+		return loanRecord;
 	}
 
 	@DeleteMapping("/book")
