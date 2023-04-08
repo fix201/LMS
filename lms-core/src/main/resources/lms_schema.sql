@@ -10,7 +10,8 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema lms
 -- -----------------------------------------------------
-CREATE DATABASE if not exists `lms`;
+DROP DATABASE IF EXISTS `lms`;
+CREATE DATABASE `lms`;
 
 DROP SCHEMA IF EXISTS `lms` ;
 
