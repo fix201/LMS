@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS `lms`.`publisher` (
   `establishment_date` DATE NULL,
   `isbn_prefix` VARCHAR(5),
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `phone_number_unique` (`phone_number` ASC) VISIBLE,
-  UNIQUE INDEX `email_unique` (`email` ASC) VISIBLE,
-  UNIQUE INDEX `name_unique` (`name` ASC) VISIBLE)
+  UNIQUE INDEX `phone_number_unique` (`phone_number` ASC) ,
+  UNIQUE INDEX `email_unique` (`email` ASC) ,
+  UNIQUE INDEX `name_unique` (`name` ASC) )
 ENGINE = InnoDB;
 
 
@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS `lms`.`book` (
   `language` VARCHAR(45) NULL,
   `publication_date` DATE NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `isbn_unique` (`isbn` ASC) VISIBLE,
-  INDEX `fk_book_publisher_idx` (`publisher_id` ASC) VISIBLE,
+  UNIQUE INDEX `isbn_unique` (`isbn` ASC) ,
+  INDEX `fk_book_publisher_idx` (`publisher_id` ASC) ,
   CONSTRAINT `fk_book_publisher`
     FOREIGN KEY (`publisher_id`)
     REFERENCES `lms`.`publisher` (`id`)
@@ -89,8 +89,8 @@ CREATE TABLE IF NOT EXISTS `lms`.`book_genre` (
   `book_id` INT NOT NULL,
   `genre_id` INT NOT NULL,
   PRIMARY KEY (`book_id`, `genre_id`),
-  INDEX `fk_book_has_genre_genre1_idx` (`genre_id` ASC) VISIBLE,
-  INDEX `fk_book_has_genre_book1_idx` (`book_id` ASC) VISIBLE,
+  INDEX `fk_book_has_genre_genre1_idx` (`genre_id` ASC) ,
+  INDEX `fk_book_has_genre_book1_idx` (`book_id` ASC) ,
   CONSTRAINT `fk_book_has_genre_book1`
     FOREIGN KEY (`book_id`)
     REFERENCES `lms`.`book` (`id`)
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `lms`.`author` (
   `email` VARCHAR(45) NULL,
   `dob` DATE NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_unique` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `email_unique` (`email` ASC) )
 ENGINE = InnoDB;
 
 
@@ -129,8 +129,8 @@ CREATE TABLE IF NOT EXISTS `lms`.`book_author` (
   `book_id` INT NOT NULL,
   `author_id` INT NOT NULL,
   PRIMARY KEY (`book_id`, `author_id`),
-  INDEX `fk_book_has_author_author1_idx` (`author_id` ASC) VISIBLE,
-  INDEX `fk_book_has_author_book1_idx` (`book_id` ASC) VISIBLE,
+  INDEX `fk_book_has_author_author1_idx` (`author_id` ASC) ,
+  INDEX `fk_book_has_author_book1_idx` (`book_id` ASC) ,
   CONSTRAINT `fk_book_has_author_book1`
     FOREIGN KEY (`book_id`)
     REFERENCES `lms`.`book` (`id`)
@@ -158,8 +158,8 @@ CREATE TABLE IF NOT EXISTS `lms`.`user` (
   `email` VARCHAR(45) NOT NULL,
   `address` VARCHAR(60) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_unique` (`email` ASC) VISIBLE,
-  UNIQUE INDEX `phone_unique` (`phone` ASC) VISIBLE)
+  UNIQUE INDEX `email_unique` (`email` ASC) ,
+  UNIQUE INDEX `phone_unique` (`phone` ASC) )
 ENGINE = InnoDB;
 
 
@@ -209,9 +209,9 @@ CREATE TABLE IF NOT EXISTS `lms`.`librarian` (
   `library_branch_id` INT NOT NULL,
   `access_level` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_unique` (`email` ASC) VISIBLE,
-  INDEX `fk_librarian_library_branch1_idx` (`library_branch_id` ASC) VISIBLE,
-  INDEX `fk_librarian_lms_access_level1_idx` (`access_level` ASC) VISIBLE,
+  UNIQUE INDEX `email_unique` (`email` ASC) ,
+  INDEX `fk_librarian_library_branch1_idx` (`library_branch_id` ASC) ,
+  INDEX `fk_librarian_lms_access_level1_idx` (`access_level` ASC) ,
   CONSTRAINT `fk_librarian_library_branch1`
     FOREIGN KEY (`library_branch_id`)
     REFERENCES `lms`.`library_branch` (`id`)
@@ -235,8 +235,8 @@ CREATE TABLE IF NOT EXISTS `lms`.`book_copy` (
   `book_id` INT NOT NULL,
   `no_of_copies` INT NULL DEFAULT 0,
   PRIMARY KEY (`library_branch_id`, `book_id`),
-  INDEX `fk_library_branch_has_book_book1_idx` (`book_id` ASC) VISIBLE,
-  INDEX `fk_library_branch_has_book_library_branch1_idx` (`library_branch_id` ASC) VISIBLE,
+  INDEX `fk_library_branch_has_book_book1_idx` (`book_id` ASC) ,
+  INDEX `fk_library_branch_has_book_library_branch1_idx` (`library_branch_id` ASC) ,
   CONSTRAINT `fk_library_branch_has_book_library_branch1`
     FOREIGN KEY (`library_branch_id`)
     REFERENCES `lms`.`library_branch` (`id`)
@@ -263,8 +263,8 @@ CREATE TABLE IF NOT EXISTS `lms`.`loan_record` (
   `due_date` DATETIME NOT NULL,
   `date_in` DATETIME NULL,
   PRIMARY KEY (`user_id`, `library_branch_id`, `book_id`, `loan_date`),
-  INDEX `fk_loan_record_library_branch1_idx` (`library_branch_id` ASC) VISIBLE,
-  INDEX `fk_loan_record_book1_idx` (`book_id` ASC) VISIBLE,
+  INDEX `fk_loan_record_library_branch1_idx` (`library_branch_id` ASC) ,
+  INDEX `fk_loan_record_book1_idx` (`book_id` ASC) ,
   CONSTRAINT `fk_loan_record_member1`
     FOREIGN KEY (`user_id`)
     REFERENCES `lms`.`user` (`id`)
