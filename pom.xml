@@ -24,5 +24,6 @@
 	<modules>
 		<module>lms-core</module>
 		<module>lms-ui</module>
+		<module>lms-infrastructure</module>
 	</modules>
 </project>
