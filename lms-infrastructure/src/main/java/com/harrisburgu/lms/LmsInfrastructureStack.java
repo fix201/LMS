@@ -28,12 +28,20 @@ import software.amazon.awscdk.services.rds.StorageType;
 import software.amazon.awscdk.services.s3.Bucket;
 import software.constructs.Construct;
 
+import java.util.List;
+
 public class LmsInfrastructureStack extends Stack {
 
     public LmsInfrastructureStack(final Construct scope, final String id, final StackProps props) {
         super(scope, id, props);
 
         final IVpc vpc = Vpc.fromLookup(this, "DefaultVPC", VpcLookupOptions.builder().isDefault(true).build());
+
+        SecurityGroup rdsSecurityGroup = SecurityGroup.Builder.create(this, id + "-rds-sg")
+                .vpc(vpc)
+                .description("Allow MySQL traffic from EC2 instances")
+                .build();
+        rdsSecurityGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(3306), "allow MySQL access from the world");
         
         // create rds
         // return endpoint
@@ -43,13 +51,14 @@ public class LmsInfrastructureStack extends Stack {
                 .storageType(StorageType.GP2)
                 .allocatedStorage(20)
                 .vpc(vpc)
+                .securityGroups(List.of(rdsSecurityGroup))
                 .publiclyAccessible(true)
                 .vpcSubnets(SubnetSelection.builder().subnetType(SubnetType.PUBLIC).build())
                 .removalPolicy(RemovalPolicy.DESTROY)
                 .build();
 
         // ec2 instance security group
-        SecurityGroup securityGroup = SecurityGroup.Builder.create(this, id + "sg")
+        SecurityGroup securityGroup = SecurityGroup.Builder.create(this, id + "-ec2-sg")
                 .vpc(vpc)
                 .description("Allow ssh access to ec2 instances")
                 .allowAllOutbound(true)
