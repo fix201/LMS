@@ -1,0 +1,547 @@
+{
+  "version": "tree-0.1",
+  "tree": {
+    "id": "App",
+    "path": "",
+    "children": {
+      "LmsInfrastructureStack": {
+        "id": "LmsInfrastructureStack",
+        "path": "LmsInfrastructureStack",
+        "children": {
+          "DefaultVPC": {
+            "id": "DefaultVPC",
+            "path": "LmsInfrastructureStack/DefaultVPC",
+            "children": {
+              "PublicSubnet1": {
+                "id": "PublicSubnet1",
+                "path": "LmsInfrastructureStack/DefaultVPC/PublicSubnet1",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.85.0"
+                }
+              },
+              "PublicSubnet2": {
+                "id": "PublicSubnet2",
+                "path": "LmsInfrastructureStack/DefaultVPC/PublicSubnet2",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.85.0"
+                }
+              },
+              "PublicSubnet3": {
+                "id": "PublicSubnet3",
+                "path": "LmsInfrastructureStack/DefaultVPC/PublicSubnet3",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.85.0"
+                }
+              },
+              "PublicSubnet4": {
+                "id": "PublicSubnet4",
+                "path": "LmsInfrastructureStack/DefaultVPC/PublicSubnet4",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.85.0"
+                }
+              },
+              "PublicSubnet5": {
+                "id": "PublicSubnet5",
+                "path": "LmsInfrastructureStack/DefaultVPC/PublicSubnet5",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.85.0"
+                }
+              },
+              "PublicSubnet6": {
+                "id": "PublicSubnet6",
+                "path": "LmsInfrastructureStack/DefaultVPC/PublicSubnet6",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.Resource",
+                  "version": "2.85.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.85.0"
+            }
+          },
+          "LmsInfrastructureStack-rds": {
+            "id": "LmsInfrastructureStack-rds",
+            "path": "LmsInfrastructureStack/LmsInfrastructureStack-rds",
+            "children": {
+              "SubnetGroup": {
+                "id": "SubnetGroup",
+                "path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/SubnetGroup",
+                "children": {
+                  "Default": {
+                    "id": "Default",
+                    "path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/SubnetGroup/Default",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::RDS::DBSubnetGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "dbSubnetGroupDescription": "Subnet group for LmsInfrastructureStack-rds database",
+                        "subnetIds": [
+                          "subnet-0c8b89f03e4a9df45",
+                          "subnet-00ad25bd2cb9dbc67",
+                          "subnet-00d59b36c1f1e0dbc",
+                          "subnet-026845be3e61f97f1",
+                          "subnet-0ad5f96b61a1a41a1",
+                          "subnet-0b0eb5c6e1fd7a33b"
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_rds.CfnDBSubnetGroup",
+                      "version": "2.85.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_rds.SubnetGroup",
+                  "version": "2.85.0"
+                }
+              },
+              "SecurityGroup": {
+                "id": "SecurityGroup",
+                "path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/SecurityGroup",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/SecurityGroup/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                      "aws:cdk:cloudformation:props": {
+                        "groupDescription": "Security group for LmsInfrastructureStack-rds database",
+                        "securityGroupEgress": [
+                          {
+                            "cidrIp": "0.0.0.0/0",
+                            "description": "Allow all outbound traffic by default",
+                            "ipProtocol": "-1"
+                          }
+                        ],
+                        "vpcId": "vpc-088d1305d6fbe9926"
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                      "version": "2.85.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+                  "version": "2.85.0"
+                }
+              },
+              "Secret": {
+                "id": "Secret",
+                "path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/Secret",
+                "children": {
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/Secret/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::SecretsManager::Secret",
+                      "aws:cdk:cloudformation:props": {
+                        "description": {
+                          "Fn::Join": [
+                            "",
+                            [
+                              "Generated by the CDK for stack: ",
+                              {
+                                "Ref": "AWS::StackName"
+                              }
+                            ]
+                          ]
+                        },
+                        "generateSecretString": {
+                          "passwordLength": 30,
+                          "secretStringTemplate": "{\"username\":\"admin\"}",
+                          "generateStringKey": "password",
+                          "excludeCharacters": " %+~`#$&*()|[]{}:;<>?!'/@\"\\"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_secretsmanager.CfnSecret",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "Attachment": {
+                    "id": "Attachment",
+                    "path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/Secret/Attachment",
+                    "children": {
+                      "Resource": {
+                        "id": "Resource",
+                        "path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/Secret/Attachment/Resource",
+                        "attributes": {
+                          "aws:cdk:cloudformation:type": "AWS::SecretsManager::SecretTargetAttachment",
+                          "aws:cdk:cloudformation:props": {
+                            "secretId": {
+                              "Ref": "LmsInfrastructureStackrdsSecretF0758C80"
+                            },
+                            "targetId": {
+                              "Ref": "LmsInfrastructureStackrds37ADCB3E"
+                            },
+                            "targetType": "AWS::RDS::DBInstance"
+                          }
+                        },
+                        "constructInfo": {
+                          "fqn": "aws-cdk-lib.aws_secretsmanager.CfnSecretTargetAttachment",
+                          "version": "2.85.0"
+                        }
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_secretsmanager.SecretTargetAttachment",
+                      "version": "2.85.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_rds.DatabaseSecret",
+                  "version": "2.85.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::RDS::DBInstance",
+                  "aws:cdk:cloudformation:props": {
+                    "allocatedStorage": "20",
+                    "copyTagsToSnapshot": true,
+                    "dbInstanceClass": "db.t3.micro",
+                    "dbSubnetGroupName": {
+                      "Ref": "LmsInfrastructureStackrdsSubnetGroup3CDD1554"
+                    },
+                    "engine": "mariadb",
+                    "masterUsername": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "{{resolve:secretsmanager:",
+                          {
+                            "Ref": "LmsInfrastructureStackrdsSecretF0758C80"
+                          },
+                          ":SecretString:username::}}"
+                        ]
+                      ]
+                    },
+                    "masterUserPassword": {
+                      "Fn::Join": [
+                        "",
+                        [
+                          "{{resolve:secretsmanager:",
+                          {
+                            "Ref": "LmsInfrastructureStackrdsSecretF0758C80"
+                          },
+                          ":SecretString:password::}}"
+                        ]
+                      ]
+                    },
+                    "publiclyAccessible": true,
+                    "storageType": "gp2",
+                    "vpcSecurityGroups": [
+                      {
+                        "Fn::GetAtt": [
+                          "LmsInfrastructureStackrdsSecurityGroup0B81EA4C",
+                          "GroupId"
+                        ]
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_rds.CfnDBInstance",
+                  "version": "2.85.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_rds.DatabaseInstance",
+              "version": "2.85.0"
+            }
+          },
+          "LmsInfrastructureStacksg": {
+            "id": "LmsInfrastructureStacksg",
+            "path": "LmsInfrastructureStack/LmsInfrastructureStacksg",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LmsInfrastructureStack/LmsInfrastructureStacksg/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
+                  "aws:cdk:cloudformation:props": {
+                    "groupDescription": "Allow ssh access to ec2 instances",
+                    "vpcId": "vpc-088d1305d6fbe9926"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroup",
+                  "version": "2.85.0"
+                }
+              },
+              "to 0.0.0.0_0:ALL TRAFFIC": {
+                "id": "to 0.0.0.0_0:ALL TRAFFIC",
+                "path": "LmsInfrastructureStack/LmsInfrastructureStacksg/to 0.0.0.0_0:ALL TRAFFIC",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupEgress",
+                  "aws:cdk:cloudformation:props": {
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LmsInfrastructureStacksgE6197346",
+                        "GroupId"
+                      ]
+                    },
+                    "ipProtocol": "-1",
+                    "cidrIp": "0.0.0.0/0",
+                    "description": "Allow all outbound traffic by default"
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupEgress",
+                  "version": "2.85.0"
+                }
+              },
+              "from 0.0.0.0_0:22": {
+                "id": "from 0.0.0.0_0:22",
+                "path": "LmsInfrastructureStack/LmsInfrastructureStacksg/from 0.0.0.0_0:22",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroupIngress",
+                  "aws:cdk:cloudformation:props": {
+                    "ipProtocol": "tcp",
+                    "cidrIp": "0.0.0.0/0",
+                    "description": "allow ssh access from the world",
+                    "fromPort": 22,
+                    "groupId": {
+                      "Fn::GetAtt": [
+                        "LmsInfrastructureStacksgE6197346",
+                        "GroupId"
+                      ]
+                    },
+                    "toPort": 22
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnSecurityGroupIngress",
+                  "version": "2.85.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.SecurityGroup",
+              "version": "2.85.0"
+            }
+          },
+          "LmsInfrastructureStack-ec2": {
+            "id": "LmsInfrastructureStack-ec2",
+            "path": "LmsInfrastructureStack/LmsInfrastructureStack-ec2",
+            "children": {
+              "InstanceRole": {
+                "id": "InstanceRole",
+                "path": "LmsInfrastructureStack/LmsInfrastructureStack-ec2/InstanceRole",
+                "children": {
+                  "ImportInstanceRole": {
+                    "id": "ImportInstanceRole",
+                    "path": "LmsInfrastructureStack/LmsInfrastructureStack-ec2/InstanceRole/ImportInstanceRole",
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.Resource",
+                      "version": "2.85.0"
+                    }
+                  },
+                  "Resource": {
+                    "id": "Resource",
+                    "path": "LmsInfrastructureStack/LmsInfrastructureStack-ec2/InstanceRole/Resource",
+                    "attributes": {
+                      "aws:cdk:cloudformation:type": "AWS::IAM::Role",
+                      "aws:cdk:cloudformation:props": {
+                        "assumeRolePolicyDocument": {
+                          "Statement": [
+                            {
+                              "Action": "sts:AssumeRole",
+                              "Effect": "Allow",
+                              "Principal": {
+                                "Service": "ec2.amazonaws.com"
+                              }
+                            }
+                          ],
+                          "Version": "2012-10-17"
+                        },
+                        "tags": [
+                          {
+                            "key": "Name",
+                            "value": "LmsInfrastructureStack/LmsInfrastructureStack-ec2"
+                          }
+                        ]
+                      }
+                    },
+                    "constructInfo": {
+                      "fqn": "aws-cdk-lib.aws_iam.CfnRole",
+                      "version": "2.85.0"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.Role",
+                  "version": "2.85.0"
+                }
+              },
+              "InstanceProfile": {
+                "id": "InstanceProfile",
+                "path": "LmsInfrastructureStack/LmsInfrastructureStack-ec2/InstanceProfile",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::IAM::InstanceProfile",
+                  "aws:cdk:cloudformation:props": {
+                    "roles": [
+                      {
+                        "Ref": "LmsInfrastructureStackec2InstanceRole51A3C3C0"
+                      }
+                    ]
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_iam.CfnInstanceProfile",
+                  "version": "2.85.0"
+                }
+              },
+              "Resource": {
+                "id": "Resource",
+                "path": "LmsInfrastructureStack/LmsInfrastructureStack-ec2/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::EC2::Instance",
+                  "aws:cdk:cloudformation:props": {
+                    "availabilityZone": "us-east-1a",
+                    "iamInstanceProfile": {
+                      "Ref": "LmsInfrastructureStackec2InstanceProfileCD131B68"
+                    },
+                    "imageId": {
+                      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+                    },
+                    "instanceType": "t2.micro",
+                    "keyName": "lms-kp",
+                    "securityGroupIds": [
+                      {
+                        "Fn::GetAtt": [
+                          "LmsInfrastructureStacksgE6197346",
+                          "GroupId"
+                        ]
+                      }
+                    ],
+                    "subnetId": "subnet-0c8b89f03e4a9df45",
+                    "tags": [
+                      {
+                        "key": "Name",
+                        "value": "LmsInfrastructureStack/LmsInfrastructureStack-ec2"
+                      }
+                    ],
+                    "userData": {
+                      "Fn::Base64": "#!/bin/bash\ntouch hello.txt\n"
+                    }
+                  }
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_ec2.CfnInstance",
+                  "version": "2.85.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_ec2.Instance",
+              "version": "2.85.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "path": "LmsInfrastructureStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.85.0"
+            }
+          },
+          "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118": {
+            "id": "SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "path": "LmsInfrastructureStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.Resource",
+              "version": "2.85.0"
+            }
+          },
+          "LmsInfrastructureStack-s3": {
+            "id": "LmsInfrastructureStack-s3",
+            "path": "LmsInfrastructureStack/LmsInfrastructureStack-s3",
+            "children": {
+              "Resource": {
+                "id": "Resource",
+                "path": "LmsInfrastructureStack/LmsInfrastructureStack-s3/Resource",
+                "attributes": {
+                  "aws:cdk:cloudformation:type": "AWS::S3::Bucket",
+                  "aws:cdk:cloudformation:props": {}
+                },
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.aws_s3.CfnBucket",
+                  "version": "2.85.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.aws_s3.Bucket",
+              "version": "2.85.0"
+            }
+          },
+          "CDKMetadata": {
+            "id": "CDKMetadata",
+            "path": "LmsInfrastructureStack/CDKMetadata",
+            "children": {
+              "Default": {
+                "id": "Default",
+                "path": "LmsInfrastructureStack/CDKMetadata/Default",
+                "constructInfo": {
+                  "fqn": "aws-cdk-lib.CfnResource",
+                  "version": "2.85.0"
+                }
+              }
+            },
+            "constructInfo": {
+              "fqn": "constructs.Construct",
+              "version": "10.2.62"
+            }
+          },
+          "BootstrapVersion": {
+            "id": "BootstrapVersion",
+            "path": "LmsInfrastructureStack/BootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnParameter",
+              "version": "2.85.0"
+            }
+          },
+          "CheckBootstrapVersion": {
+            "id": "CheckBootstrapVersion",
+            "path": "LmsInfrastructureStack/CheckBootstrapVersion",
+            "constructInfo": {
+              "fqn": "aws-cdk-lib.CfnRule",
+              "version": "2.85.0"
+            }
+          }
+        },
+        "constructInfo": {
+          "fqn": "aws-cdk-lib.Stack",
+          "version": "2.85.0"
+        }
+      },
+      "Tree": {
+        "id": "Tree",
+        "path": "Tree",
+        "constructInfo": {
+          "fqn": "constructs.Construct",
+          "version": "10.2.62"
+        }
+      }
+    },
+    "constructInfo": {
+      "fqn": "aws-cdk-lib.App",
+      "version": "2.85.0"
+    }
+  }
+}

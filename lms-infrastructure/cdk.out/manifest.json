@@ -1,0 +1,156 @@
+{
+  "version": "32.0.0",
+  "artifacts": {
+    "LmsInfrastructureStack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "LmsInfrastructureStack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "LmsInfrastructureStack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://105068229758/us-east-1",
+      "properties": {
+        "templateFile": "LmsInfrastructureStack.template.json",
+        "tags": {
+          "env": "lms"
+        },
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::105068229758:role/cdk-hnb659fds-deploy-role-105068229758-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::105068229758:role/cdk-hnb659fds-cfn-exec-role-105068229758-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-105068229758-us-east-1/30c3ce8ae179dee2d844059860dedc1ded265fd8560b3354a74f62faa6f9df30.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "LmsInfrastructureStack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::105068229758:role/cdk-hnb659fds-lookup-role-105068229758-us-east-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "LmsInfrastructureStack.assets"
+      ],
+      "metadata": {
+        "/LmsInfrastructureStack": [
+          {
+            "type": "aws:cdk:stack-tags",
+            "data": [
+              {
+                "Key": "env",
+                "Value": "lms"
+              }
+            ]
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStack-rds/SubnetGroup/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStackrdsSubnetGroup3CDD1554"
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStack-rds/SecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStackrdsSecurityGroup0B81EA4C"
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStack-rds/Secret/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStackrdsSecretF0758C80"
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStack-rds/Secret/Attachment/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStackrdsSecretAttachmentB9F47762"
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStack-rds/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStackrds37ADCB3E"
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStacksg/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStacksgE6197346"
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStacksg/to 0.0.0.0_0:ALL TRAFFIC": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStacksgto00000ALLTRAFFIC8DB47BA0"
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStacksg/from 0.0.0.0_0:22": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStacksgfrom00000224535C2A9"
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStack-ec2/InstanceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStackec2InstanceRole51A3C3C0"
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStack-ec2/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStackec2InstanceProfileCD131B68"
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStack-ec2/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStackec292F4E4F8"
+          }
+        ],
+        "/LmsInfrastructureStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+          }
+        ],
+        "/LmsInfrastructureStack/LmsInfrastructureStack-s3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LmsInfrastructureStacks3ADED49B0"
+          }
+        ],
+        "/LmsInfrastructureStack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/LmsInfrastructureStack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/LmsInfrastructureStack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "LmsInfrastructureStack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

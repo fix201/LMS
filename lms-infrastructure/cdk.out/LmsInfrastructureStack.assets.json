@@ -1,0 +1,20 @@
+{
+  "version": "32.0.0",
+  "files": {
+    "30c3ce8ae179dee2d844059860dedc1ded265fd8560b3354a74f62faa6f9df30": {
+      "source": {
+        "path": "LmsInfrastructureStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "105068229758-us-east-1": {
+          "bucketName": "cdk-hnb659fds-assets-105068229758-us-east-1",
+          "objectKey": "30c3ce8ae179dee2d844059860dedc1ded265fd8560b3354a74f62faa6f9df30.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::105068229758:role/cdk-hnb659fds-file-publishing-role-105068229758-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}
