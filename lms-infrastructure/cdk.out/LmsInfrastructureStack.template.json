@@ -1,10 +1,36 @@
 {
  "Description": "Library Management System Stack",
  "Resources": {
-  "LmsInfrastructureStackrdsSubnetGroup3CDD1554": {
+  "LMSDBSGB8D5BED9": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Allow MySQL traffic from EC2 instances",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "allow MySQL access from the world",
+      "FromPort": 3306,
+      "IpProtocol": "tcp",
+      "ToPort": 3306
+     }
+    ],
+    "VpcId": "vpc-088d1305d6fbe9926"
+   },
+   "Metadata": {
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-DB-SG/Resource"
+   }
+  },
+  "LMSDBSubnetGroup4D88B73D": {
    "Type": "AWS::RDS::DBSubnetGroup",
    "Properties": {
-    "DBSubnetGroupDescription": "Subnet group for LmsInfrastructureStack-rds database",
+    "DBSubnetGroupDescription": "Subnet group for LMS-DB database",
     "SubnetIds": [
      "subnet-0c8b89f03e4a9df45",
      "subnet-00ad25bd2cb9dbc67",
@@ -15,27 +41,10 @@
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/SubnetGroup/Default"
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-DB/SubnetGroup/Default"
    }
   },
-  "LmsInfrastructureStackrdsSecurityGroup0B81EA4C": {
-   "Type": "AWS::EC2::SecurityGroup",
-   "Properties": {
-    "GroupDescription": "Security group for LmsInfrastructureStack-rds database",
-    "SecurityGroupEgress": [
-     {
-      "CidrIp": "0.0.0.0/0",
-      "Description": "Allow all outbound traffic by default",
-      "IpProtocol": "-1"
-     }
-    ],
-    "VpcId": "vpc-088d1305d6fbe9926"
-   },
-   "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/SecurityGroup/Resource"
-   }
-  },
-  "LmsInfrastructureStackrdsSecretF0758C80": {
+  "LMSDBSecretD785CF92": {
    "Type": "AWS::SecretsManager::Secret",
    "Properties": {
     "Description": {
@@ -59,32 +68,33 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/Secret/Resource"
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-DB/Secret/Resource"
    }
   },
-  "LmsInfrastructureStackrdsSecretAttachmentB9F47762": {
+  "LMSDBSecretAttachment56422261": {
    "Type": "AWS::SecretsManager::SecretTargetAttachment",
    "Properties": {
     "SecretId": {
-     "Ref": "LmsInfrastructureStackrdsSecretF0758C80"
+     "Ref": "LMSDBSecretD785CF92"
     },
     "TargetId": {
-     "Ref": "LmsInfrastructureStackrds37ADCB3E"
+     "Ref": "LMSDB13291CB3"
     },
     "TargetType": "AWS::RDS::DBInstance"
    },
    "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/Secret/Attachment/Resource"
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-DB/Secret/Attachment/Resource"
    }
   },
-  "LmsInfrastructureStackrds37ADCB3E": {
+  "LMSDB13291CB3": {
    "Type": "AWS::RDS::DBInstance",
    "Properties": {
     "AllocatedStorage": "20",
     "CopyTagsToSnapshot": true,
     "DBInstanceClass": "db.t3.micro",
+    "DBName": "lms",
     "DBSubnetGroupName": {
-     "Ref": "LmsInfrastructureStackrdsSubnetGroup3CDD1554"
+     "Ref": "LMSDBSubnetGroup4D88B73D"
     },
     "Engine": "mariadb",
     "MasterUsername": {
@@ -93,7 +103,7 @@
       [
        "{{resolve:secretsmanager:",
        {
-        "Ref": "LmsInfrastructureStackrdsSecretF0758C80"
+        "Ref": "LMSDBSecretD785CF92"
        },
        ":SecretString:username::}}"
       ]
@@ -105,7 +115,7 @@
       [
        "{{resolve:secretsmanager:",
        {
-        "Ref": "LmsInfrastructureStackrdsSecretF0758C80"
+        "Ref": "LMSDBSecretD785CF92"
        },
        ":SecretString:password::}}"
       ]
@@ -116,7 +126,7 @@
     "VPCSecurityGroups": [
      {
       "Fn::GetAtt": [
-       "LmsInfrastructureStackrdsSecurityGroup0B81EA4C",
+       "LMSDBSGB8D5BED9",
        "GroupId"
       ]
      }
@@ -125,25 +135,25 @@
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStack-rds/Resource"
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-DB/Resource"
    }
   },
-  "LmsInfrastructureStacksgE6197346": {
+  "LMSServerSG05B4FF1A": {
    "Type": "AWS::EC2::SecurityGroup",
    "Properties": {
     "GroupDescription": "Allow ssh access to ec2 instances",
     "VpcId": "vpc-088d1305d6fbe9926"
    },
    "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStacksg/Resource"
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-Server-SG/Resource"
    }
   },
-  "LmsInfrastructureStacksgto00000ALLTRAFFIC8DB47BA0": {
+  "LMSServerSGto00000ALLTRAFFIC854FD532": {
    "Type": "AWS::EC2::SecurityGroupEgress",
    "Properties": {
     "GroupId": {
      "Fn::GetAtt": [
-      "LmsInfrastructureStacksgE6197346",
+      "LMSServerSG05B4FF1A",
       "GroupId"
      ]
     },
@@ -152,10 +162,10 @@
     "Description": "Allow all outbound traffic by default"
    },
    "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStacksg/to 0.0.0.0_0:ALL TRAFFIC"
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-Server-SG/to 0.0.0.0_0:ALL TRAFFIC"
    }
   },
-  "LmsInfrastructureStacksgfrom00000224535C2A9": {
+  "LMSServerSGfrom0000022677F9D9B": {
    "Type": "AWS::EC2::SecurityGroupIngress",
    "Properties": {
     "IpProtocol": "tcp",
@@ -164,17 +174,36 @@
     "FromPort": 22,
     "GroupId": {
      "Fn::GetAtt": [
-      "LmsInfrastructureStacksgE6197346",
+      "LMSServerSG05B4FF1A",
       "GroupId"
      ]
     },
     "ToPort": 22
    },
    "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStacksg/from 0.0.0.0_0:22"
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-Server-SG/from 0.0.0.0_0:22"
    }
   },
-  "LmsInfrastructureStackec2InstanceRole51A3C3C0": {
+  "LMSServerSGfrom0000080804DF92DC6": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "IpProtocol": "tcp",
+    "CidrIp": "0.0.0.0/0",
+    "Description": "allow tomcat server access",
+    "FromPort": 8080,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "LMSServerSG05B4FF1A",
+      "GroupId"
+     ]
+    },
+    "ToPort": 8080
+   },
+   "Metadata": {
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-Server-SG/from 0.0.0.0_0:8080"
+   }
+  },
+  "LMSSERVERInstanceRole12111154": {
    "Type": "AWS::IAM::Role",
    "Properties": {
     "AssumeRolePolicyDocument": {
@@ -192,43 +221,43 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "LmsInfrastructureStack/LmsInfrastructureStack-ec2"
+      "Value": "LmsInfrastructureStack/LMS-SERVER"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStack-ec2/InstanceRole/Resource"
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-SERVER/InstanceRole/Resource"
    }
   },
-  "LmsInfrastructureStackec2InstanceProfileCD131B68": {
+  "LMSSERVERInstanceProfileA12B0BBB": {
    "Type": "AWS::IAM::InstanceProfile",
    "Properties": {
     "Roles": [
      {
-      "Ref": "LmsInfrastructureStackec2InstanceRole51A3C3C0"
+      "Ref": "LMSSERVERInstanceRole12111154"
      }
     ]
    },
    "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStack-ec2/InstanceProfile"
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-SERVER/InstanceProfile"
    }
   },
-  "LmsInfrastructureStackec292F4E4F8": {
+  "LMSSERVER33378982": {
    "Type": "AWS::EC2::Instance",
    "Properties": {
     "AvailabilityZone": "us-east-1a",
     "IamInstanceProfile": {
-     "Ref": "LmsInfrastructureStackec2InstanceProfileCD131B68"
+     "Ref": "LMSSERVERInstanceProfileA12B0BBB"
     },
     "ImageId": {
-     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
     },
     "InstanceType": "t2.micro",
     "KeyName": "lms-kp",
     "SecurityGroupIds": [
      {
       "Fn::GetAtt": [
-       "LmsInfrastructureStacksgE6197346",
+       "LMSServerSG05B4FF1A",
        "GroupId"
       ]
      }
@@ -237,32 +266,209 @@
     "Tags": [
      {
       "Key": "Name",
-      "Value": "LmsInfrastructureStack/LmsInfrastructureStack-ec2"
+      "Value": "LmsInfrastructureStack/LMS-SERVER"
      }
     ],
     "UserData": {
-     "Fn::Base64": "#!/bin/bash\ntouch hello.txt\n"
+     "Fn::Base64": "#!/bin/bash\nyum update -y\nyum install java-17-amazon-corretto-headless -y\n"
     }
    },
    "DependsOn": [
-    "LmsInfrastructureStackec2InstanceRole51A3C3C0"
+    "LMSSERVERInstanceRole12111154"
    ],
    "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStack-ec2/Resource"
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-SERVER/Resource"
    }
   },
-  "LmsInfrastructureStacks3ADED49B0": {
+  "LMSS39680EC24": {
    "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketName": "library-mngmt-system",
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicPolicy": false
+    },
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     }
+    ],
+    "WebsiteConfiguration": {
+     "ErrorDocument": "index.html",
+     "IndexDocument": "index.html"
+    }
+   },
    "UpdateReplacePolicy": "Delete",
    "DeletionPolicy": "Delete",
    "Metadata": {
-    "aws:cdk:path": "LmsInfrastructureStack/LmsInfrastructureStack-s3/Resource"
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-S3/Resource"
+   }
+  },
+  "LMSS3PolicyB137EAD0": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "LMSS39680EC24"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:GetObject",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "LMSS39680EC24",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "s3:DeleteObject*",
+        "s3:GetBucket*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+          "Arn"
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "LMSS39680EC24",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "LMSS39680EC24",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-S3/Policy/Resource"
+   }
+  },
+  "LMSS3AutoDeleteObjectsCustomResourceD35A46E9": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "LMSS39680EC24"
+    }
+   },
+   "DependsOn": [
+    "LMSS3PolicyB137EAD0"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "LmsInfrastructureStack/LMS-S3/AutoDeleteObjectsCustomResource/Default"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "LmsInfrastructureStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-105068229758-us-east-1",
+     "S3Key": "64267bdade6530c78c99e1df05c9336e81c8dad82fdb06133ee90f7390f69d26.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs16.x",
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Lambda function for auto-deleting objects in ",
+       {
+        "Ref": "LMSS39680EC24"
+       },
+       " S3 bucket."
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "LmsInfrastructureStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.64267bdade6530c78c99e1df05c9336e81c8dad82fdb06133ee90f7390f69d26",
+    "aws:asset:property": "Code"
    }
   },
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31QTU/DMAz9LbunAYYQXBlDaJymljtyM68LbVJkOyAU9b+TNrQgkDg9633k2Vnrmyt9voJ3LsyhLTpb61gJmFaVyH0ggyppz5EOrOMWBGpg3HkW8EmqQu1RHqgPr+ru6Lebn8TsrtAQStbn5KDQrFMTmkBWPpYX/ifuG0LmP/TOZ35ZKxm+i3iqZwceGiQdc3rcKMMTUINyK+nok0MvajH8VgZlwelY9t1UMeNctaf+aLux8VLHTTBtPjpPwzDOeyBwKEhT/uuDB/UIb3B2cb16YWsLCl6sQ11m/AT9ZkCIoQEAAA=="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31Ry07DMBD8lt4dA0UIrn0gVC5EKXe0cbbBJLYr77qoivLvODVJgUqcZj0z9oy1c/lwJ69n8EmZqpqs1aXstgyqEQWSC16hiNpbh2oeBVTBaz4+eRf2YrWz/xOPtUeiC3pjE7+xxGBjQDSMcy98RbJbA0MJhJNlG0qLPMWslz+J0R1TPHLSzw/SiSUDFmr0skt1BmOCV/A18oLjp98NWhaT4a/SCw1GdoVrT51HHKNy73a6HRJvZbcMqkldvqcEuWu1Op7pdO77gcnBg0FGL1aB2JlpAUPWNP+SYuRBV/HGggg57q3Wth78L4H3IRZ+hgNc3dzPPkjrzAfL2qAsEn4Be2/UCvsBAAA="
    },
    "Metadata": {
     "aws:cdk:path": "LmsInfrastructureStack/CDKMetadata/Default"
@@ -270,14 +476,46 @@
   }
  },
  "Parameters": {
-  "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": {
+  "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": {
    "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
-   "Default": "/aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2"
+   "Default": "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
   },
   "BootstrapVersion": {
    "Type": "AWS::SSM::Parameter::Value<String>",
    "Default": "/cdk-bootstrap/hnb659fds/version",
    "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Outputs": {
+  "WebsiteURL": {
+   "Value": {
+    "Fn::GetAtt": [
+     "LMSS39680EC24",
+     "WebsiteURL"
+    ]
+   }
+  },
+  "DatabaseURL": {
+   "Value": {
+    "Fn::GetAtt": [
+     "LMSDB13291CB3",
+     "Endpoint.Address"
+    ]
+   }
+  },
+  "DatabasePassword": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "{{resolve:secretsmanager:",
+      {
+       "Ref": "LMSDBSecretAttachment56422261"
+      },
+      ":SecretString:password::}}"
+     ]
+    ]
+   }
   }
  },
  "Rules": {

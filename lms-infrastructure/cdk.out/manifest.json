@@ -20,7 +20,7 @@
         "validateOnSynth": false,
         "assumeRoleArn": "arn:${AWS::Partition}:iam::105068229758:role/cdk-hnb659fds-deploy-role-105068229758-us-east-1",
         "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::105068229758:role/cdk-hnb659fds-cfn-exec-role-105068229758-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-105068229758-us-east-1/30c3ce8ae179dee2d844059860dedc1ded265fd8560b3354a74f62faa6f9df30.json",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-105068229758-us-east-1/ca0a422b77bc6e29929461815fddb8a8d917d15df457a5fb140ce4a9f3567c05.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
@@ -47,82 +47,130 @@
             ]
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStack-rds/SubnetGroup/Default": [
+        "/LmsInfrastructureStack/LMS-DB-SG/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStackrdsSubnetGroup3CDD1554"
+            "data": "LMSDBSGB8D5BED9"
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStack-rds/SecurityGroup/Resource": [
+        "/LmsInfrastructureStack/LMS-DB/SubnetGroup/Default": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStackrdsSecurityGroup0B81EA4C"
+            "data": "LMSDBSubnetGroup4D88B73D"
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStack-rds/Secret/Resource": [
+        "/LmsInfrastructureStack/LMS-DB/Secret/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStackrdsSecretF0758C80"
+            "data": "LMSDBSecretD785CF92"
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStack-rds/Secret/Attachment/Resource": [
+        "/LmsInfrastructureStack/LMS-DB/Secret/Attachment/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStackrdsSecretAttachmentB9F47762"
+            "data": "LMSDBSecretAttachment56422261"
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStack-rds/Resource": [
+        "/LmsInfrastructureStack/LMS-DB/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStackrds37ADCB3E"
+            "data": "LMSDB13291CB3"
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStacksg/Resource": [
+        "/LmsInfrastructureStack/LMS-Server-SG/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStacksgE6197346"
+            "data": "LMSServerSG05B4FF1A"
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStacksg/to 0.0.0.0_0:ALL TRAFFIC": [
+        "/LmsInfrastructureStack/LMS-Server-SG/to 0.0.0.0_0:ALL TRAFFIC": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStacksgto00000ALLTRAFFIC8DB47BA0"
+            "data": "LMSServerSGto00000ALLTRAFFIC854FD532"
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStacksg/from 0.0.0.0_0:22": [
+        "/LmsInfrastructureStack/LMS-Server-SG/from 0.0.0.0_0:22": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStacksgfrom00000224535C2A9"
+            "data": "LMSServerSGfrom0000022677F9D9B"
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStack-ec2/InstanceRole/Resource": [
+        "/LmsInfrastructureStack/LMS-Server-SG/from 0.0.0.0_0:8080": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStackec2InstanceRole51A3C3C0"
+            "data": "LMSServerSGfrom0000080804DF92DC6"
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStack-ec2/InstanceProfile": [
+        "/LmsInfrastructureStack/LMS-SERVER/InstanceRole/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStackec2InstanceProfileCD131B68"
+            "data": "LMSSERVERInstanceRole12111154"
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStack-ec2/Resource": [
+        "/LmsInfrastructureStack/LMS-SERVER/InstanceProfile": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStackec292F4E4F8"
+            "data": "LMSSERVERInstanceProfileA12B0BBB"
           }
         ],
-        "/LmsInfrastructureStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
+        "/LmsInfrastructureStack/LMS-SERVER/Resource": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+            "data": "LMSSERVER33378982"
           }
         ],
-        "/LmsInfrastructureStack/LmsInfrastructureStack-s3/Resource": [
+        "/LmsInfrastructureStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn2-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
           {
             "type": "aws:cdk:logicalId",
-            "data": "LmsInfrastructureStacks3ADED49B0"
+            "data": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+          }
+        ],
+        "/LmsInfrastructureStack/LMS-S3/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LMSS39680EC24"
+          }
+        ],
+        "/LmsInfrastructureStack/LMS-S3/Policy/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LMSS3PolicyB137EAD0"
+          }
+        ],
+        "/LmsInfrastructureStack/LMS-S3/AutoDeleteObjectsCustomResource/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "LMSS3AutoDeleteObjectsCustomResourceD35A46E9"
+          }
+        ],
+        "/LmsInfrastructureStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+          }
+        ],
+        "/LmsInfrastructureStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+          }
+        ],
+        "/LmsInfrastructureStack/WebsiteURL": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "WebsiteURL"
+          }
+        ],
+        "/LmsInfrastructureStack/Database URL": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabaseURL"
+          }
+        ],
+        "/LmsInfrastructureStack/Database Password": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "DatabasePassword"
           }
         ],
         "/LmsInfrastructureStack/CDKMetadata/Default": [

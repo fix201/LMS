@@ -1,5 +1,6 @@
 package com.harrisburgu.lms;
 
+import software.amazon.awscdk.CfnOutput;
 import software.amazon.awscdk.RemovalPolicy;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
@@ -25,6 +26,7 @@ import software.amazon.awscdk.services.ec2.VpcLookupOptions;
 import software.amazon.awscdk.services.rds.DatabaseInstance;
 import software.amazon.awscdk.services.rds.DatabaseInstanceEngine;
 import software.amazon.awscdk.services.rds.StorageType;
+import software.amazon.awscdk.services.s3.BlockPublicAccess;
 import software.amazon.awscdk.services.s3.Bucket;
 import software.constructs.Construct;
 
@@ -37,15 +39,15 @@ public class LmsInfrastructureStack extends Stack {
 
         final IVpc vpc = Vpc.fromLookup(this, "DefaultVPC", VpcLookupOptions.builder().isDefault(true).build());
 
-        SecurityGroup rdsSecurityGroup = SecurityGroup.Builder.create(this, id + "-rds-sg")
+        SecurityGroup rdsSecurityGroup = SecurityGroup.Builder.create(this,  "LMS-DB-SG")
                 .vpc(vpc)
                 .description("Allow MySQL traffic from EC2 instances")
                 .build();
         rdsSecurityGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(3306), "allow MySQL access from the world");
         
         // create rds
-        // return endpoint
-        final DatabaseInstance instance = DatabaseInstance.Builder.create(this, id + "-rds")
+        final DatabaseInstance instance = DatabaseInstance.Builder.create(this, "LMS-DB")
+                .databaseName("lms")
                 .instanceType(InstanceType.of(InstanceClass.BURSTABLE3, InstanceSize.MICRO))
                 .engine(DatabaseInstanceEngine.MARIADB)
                 .storageType(StorageType.GP2)
@@ -58,32 +60,32 @@ public class LmsInfrastructureStack extends Stack {
                 .build();
 
         // ec2 instance security group
-        SecurityGroup securityGroup = SecurityGroup.Builder.create(this, id + "-ec2-sg")
+        SecurityGroup securityGroup = SecurityGroup.Builder.create(this, "LMS-Server-SG")
                 .vpc(vpc)
                 .description("Allow ssh access to ec2 instances")
                 .allowAllOutbound(true)
                 .disableInlineRules(true)
                 .build();
         securityGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(22), "allow ssh access from the world");
+        securityGroup.addIngressRule(Peer.anyIpv4(), Port.tcp(8080), "allow tomcat server access");
 
         // ec2 instance image
         IMachineImage image = AmazonLinuxImage.Builder.create()
-                .generation(AmazonLinuxGeneration.AMAZON_LINUX)
+                .generation(AmazonLinuxGeneration.AMAZON_LINUX_2)
                 .edition(AmazonLinuxEdition.STANDARD)
                 .virtualization(AmazonLinuxVirt.HVM)
                 .storage(AmazonLinuxStorage.GENERAL_PURPOSE)
                 .build();
 
+        // use scripts to install java
         UserData userData = UserData.forLinux();
         userData.addCommands("""
-                touch hello.txt
+                yum update -y
+                yum install java-17-amazon-corretto-headless -y
                 """);
 
-        // create ec2 instance
-        // use scripts to install java
-        // environment variable for rds endpoint
         // Create an EC2 instance
-        Instance ec2Instance = Instance.Builder.create(this, id + "-ec2")
+        Instance ec2Instance = Instance.Builder.create(this, "LMS-SERVER")
                 .instanceType(InstanceType.of(InstanceClass.BURSTABLE2, InstanceSize.MICRO))
                 .machineImage(image)
                 .vpc(vpc)
@@ -93,9 +95,26 @@ public class LmsInfrastructureStack extends Stack {
                 .build();
 
         // create s3 bucket for user interface
-        // variable for backend endpoint
-        Bucket websiteBucket = Bucket.Builder.create(this, id + "-s3")
+        Bucket websiteBucket = Bucket.Builder.create(this, "LMS-S3")
+                .bucketName("library-mngmt-system")
                 .removalPolicy(RemovalPolicy.DESTROY)
+                .autoDeleteObjects(true)
+                .blockPublicAccess(BlockPublicAccess.Builder.create().blockPublicPolicy(false).build())
+                .publicReadAccess(true)
+                .websiteIndexDocument("index.html")
+                .websiteErrorDocument("index.html")
+                .build();
+        
+        CfnOutput.Builder.create(this, "WebsiteURL")
+                .value(websiteBucket.getBucketWebsiteUrl())
+                .build();
+
+        CfnOutput.Builder.create(this, "Database URL")
+                .value(instance.getDbInstanceEndpointAddress())
+                .build();
+
+        CfnOutput.Builder.create(this, "Database Password")
+                .value(instance.getSecret().secretValueFromJson("password").unsafeUnwrap())
                 .build();
     }
 }
