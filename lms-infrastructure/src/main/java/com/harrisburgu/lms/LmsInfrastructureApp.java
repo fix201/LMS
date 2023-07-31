@@ -26,7 +26,7 @@ public class LmsInfrastructureApp {
                 StackProps.builder()
                         .description("Library Management System Stack")
                         .tags(Map.of("env","lms"))
-                        .env(makeEnv(null, null))
+                        .env(makeEnv("010538123375", "us-east-1"))
                         .build());
 
         app.synth();

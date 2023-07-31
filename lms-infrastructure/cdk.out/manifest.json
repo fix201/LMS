@@ -11,23 +11,23 @@
     },
     "LmsInfrastructureStack": {
       "type": "aws:cloudformation:stack",
-      "environment": "aws://105068229758/us-east-1",
+      "environment": "aws://010538123375/us-east-1",
       "properties": {
         "templateFile": "LmsInfrastructureStack.template.json",
         "tags": {
           "env": "lms"
         },
         "validateOnSynth": false,
-        "assumeRoleArn": "arn:${AWS::Partition}:iam::105068229758:role/cdk-hnb659fds-deploy-role-105068229758-us-east-1",
-        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::105068229758:role/cdk-hnb659fds-cfn-exec-role-105068229758-us-east-1",
-        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-105068229758-us-east-1/ca0a422b77bc6e29929461815fddb8a8d917d15df457a5fb140ce4a9f3567c05.json",
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::010538123375:role/cdk-hnb659fds-deploy-role-010538123375-us-east-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::010538123375:role/cdk-hnb659fds-cfn-exec-role-010538123375-us-east-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-010538123375-us-east-1/e9148baa705b132071d14127d72a647513122af29fc431859572bd9b694d6522.json",
         "requiresBootstrapStackVersion": 6,
         "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
         "additionalDependencies": [
           "LmsInfrastructureStack.assets"
         ],
         "lookupRole": {
-          "arn": "arn:${AWS::Partition}:iam::105068229758:role/cdk-hnb659fds-lookup-role-105068229758-us-east-1",
+          "arn": "arn:${AWS::Partition}:iam::010538123375:role/cdk-hnb659fds-lookup-role-010538123375-us-east-1",
           "requiresBootstrapStackVersion": 8,
           "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
         }

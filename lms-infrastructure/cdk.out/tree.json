@@ -93,7 +93,7 @@
                         "description": "allow MySQL access from the world"
                       }
                     ],
-                    "vpcId": "vpc-088d1305d6fbe9926"
+                    "vpcId": "vpc-8ea77af3"
                   }
                 },
                 "constructInfo": {
@@ -123,12 +123,12 @@
                       "aws:cdk:cloudformation:props": {
                         "dbSubnetGroupDescription": "Subnet group for LMS-DB database",
                         "subnetIds": [
-                          "subnet-0c8b89f03e4a9df45",
-                          "subnet-00ad25bd2cb9dbc67",
-                          "subnet-00d59b36c1f1e0dbc",
-                          "subnet-026845be3e61f97f1",
-                          "subnet-0ad5f96b61a1a41a1",
-                          "subnet-0b0eb5c6e1fd7a33b"
+                          "subnet-40109c61",
+                          "subnet-14a6f759",
+                          "subnet-176ae848",
+                          "subnet-859d1ce3",
+                          "subnet-0162b730",
+                          "subnet-eaadd6e4"
                         ]
                       }
                     },
@@ -285,7 +285,7 @@
                   "aws:cdk:cloudformation:type": "AWS::EC2::SecurityGroup",
                   "aws:cdk:cloudformation:props": {
                     "groupDescription": "Allow ssh access to ec2 instances",
-                    "vpcId": "vpc-088d1305d6fbe9926"
+                    "vpcId": "vpc-8ea77af3"
                   }
                 },
                 "constructInfo": {
@@ -463,7 +463,7 @@
                         ]
                       }
                     ],
-                    "subnetId": "subnet-0c8b89f03e4a9df45",
+                    "subnetId": "subnet-40109c61",
                     "tags": [
                       {
                         "key": "Name",
@@ -720,7 +720,7 @@
             },
             "constructInfo": {
               "fqn": "constructs.Construct",
-              "version": "10.2.63"
+              "version": "10.2.69"
             }
           },
           "BootstrapVersion": {
@@ -750,7 +750,7 @@
         "path": "Tree",
         "constructInfo": {
           "fqn": "constructs.Construct",
-          "version": "10.2.63"
+          "version": "10.2.69"
         }
       }
     },

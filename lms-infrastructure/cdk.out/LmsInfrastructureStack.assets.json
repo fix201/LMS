@@ -7,25 +7,25 @@
         "packaging": "zip"
       },
       "destinations": {
-        "105068229758-us-east-1": {
-          "bucketName": "cdk-hnb659fds-assets-105068229758-us-east-1",
+        "010538123375-us-east-1": {
+          "bucketName": "cdk-hnb659fds-assets-010538123375-us-east-1",
           "objectKey": "64267bdade6530c78c99e1df05c9336e81c8dad82fdb06133ee90f7390f69d26.zip",
           "region": "us-east-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::105068229758:role/cdk-hnb659fds-file-publishing-role-105068229758-us-east-1"
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::010538123375:role/cdk-hnb659fds-file-publishing-role-010538123375-us-east-1"
         }
       }
     },
-    "ca0a422b77bc6e29929461815fddb8a8d917d15df457a5fb140ce4a9f3567c05": {
+    "e9148baa705b132071d14127d72a647513122af29fc431859572bd9b694d6522": {
       "source": {
         "path": "LmsInfrastructureStack.template.json",
         "packaging": "file"
       },
       "destinations": {
-        "105068229758-us-east-1": {
-          "bucketName": "cdk-hnb659fds-assets-105068229758-us-east-1",
-          "objectKey": "ca0a422b77bc6e29929461815fddb8a8d917d15df457a5fb140ce4a9f3567c05.json",
+        "010538123375-us-east-1": {
+          "bucketName": "cdk-hnb659fds-assets-010538123375-us-east-1",
+          "objectKey": "e9148baa705b132071d14127d72a647513122af29fc431859572bd9b694d6522.json",
           "region": "us-east-1",
-          "assumeRoleArn": "arn:${AWS::Partition}:iam::105068229758:role/cdk-hnb659fds-file-publishing-role-105068229758-us-east-1"
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::010538123375:role/cdk-hnb659fds-file-publishing-role-010538123375-us-east-1"
         }
       }
     }

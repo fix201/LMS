@@ -21,7 +21,7 @@
       "ToPort": 3306
      }
     ],
-    "VpcId": "vpc-088d1305d6fbe9926"
+    "VpcId": "vpc-8ea77af3"
    },
    "Metadata": {
     "aws:cdk:path": "LmsInfrastructureStack/LMS-DB-SG/Resource"
@@ -32,12 +32,12 @@
    "Properties": {
     "DBSubnetGroupDescription": "Subnet group for LMS-DB database",
     "SubnetIds": [
-     "subnet-0c8b89f03e4a9df45",
-     "subnet-00ad25bd2cb9dbc67",
-     "subnet-00d59b36c1f1e0dbc",
-     "subnet-026845be3e61f97f1",
-     "subnet-0ad5f96b61a1a41a1",
-     "subnet-0b0eb5c6e1fd7a33b"
+     "subnet-40109c61",
+     "subnet-14a6f759",
+     "subnet-176ae848",
+     "subnet-859d1ce3",
+     "subnet-0162b730",
+     "subnet-eaadd6e4"
     ]
    },
    "Metadata": {
@@ -142,7 +142,7 @@
    "Type": "AWS::EC2::SecurityGroup",
    "Properties": {
     "GroupDescription": "Allow ssh access to ec2 instances",
-    "VpcId": "vpc-088d1305d6fbe9926"
+    "VpcId": "vpc-8ea77af3"
    },
    "Metadata": {
     "aws:cdk:path": "LmsInfrastructureStack/LMS-Server-SG/Resource"
@@ -262,7 +262,7 @@
       ]
      }
     ],
-    "SubnetId": "subnet-0c8b89f03e4a9df45",
+    "SubnetId": "subnet-40109c61",
     "Tags": [
      {
       "Key": "Name",
@@ -430,7 +430,7 @@
    "Type": "AWS::Lambda::Function",
    "Properties": {
     "Code": {
-     "S3Bucket": "cdk-hnb659fds-assets-105068229758-us-east-1",
+     "S3Bucket": "cdk-hnb659fds-assets-010538123375-us-east-1",
      "S3Key": "64267bdade6530c78c99e1df05c9336e81c8dad82fdb06133ee90f7390f69d26.zip"
     },
     "Timeout": 900,
@@ -468,7 +468,7 @@
   "CDKMetadata": {
    "Type": "AWS::CDK::Metadata",
    "Properties": {
-    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31Ry07DMBD8lt4dA0UIrn0gVC5EKXe0cbbBJLYr77qoivLvODVJgUqcZj0z9oy1c/lwJ69n8EmZqpqs1aXstgyqEQWSC16hiNpbh2oeBVTBaz4+eRf2YrWz/xOPtUeiC3pjE7+xxGBjQDSMcy98RbJbA0MJhJNlG0qLPMWslz+J0R1TPHLSzw/SiSUDFmr0skt1BmOCV/A18oLjp98NWhaT4a/SCw1GdoVrT51HHKNy73a6HRJvZbcMqkldvqcEuWu1Op7pdO77gcnBg0FGL1aB2JlpAUPWNP+SYuRBV/HGggg57q3Wth78L4H3IRZ+hgNc3dzPPkjrzAfL2qAsEn4Be2/UCvsBAAA="
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/31Ry07DMBD8lt4dU4IQXPtAqFyIUu5o426DSWxX3nVRFeXfcWqS8pA4zXpm7Blrc3l/K+cz+KBM7Zqs1ZXstgyqESWSC16hiNprhyqPAqrgNZ8evQsHsdrb/4mH2iPRH3pjE7+xxGBjQDSMcy/8jmS3BoYKCCfLNlQWeYpZL78TozumeOSkXx6kM0sGLNToZZfqDMYEL+Br5AXHT78ZtCwmw2+lFxqM7ErXnjuPOEYV3u11OyTeyG4ZVJO6fE0JCtdqdbrQ6dz3A1OAB4OMXqwCsTPTAoasaf4hxcij3sUbCyLkuLda23rwPwc+hFj4CY5wdX0n5zKfvZPWmQ+WtUFZJvwEecI5Of8BAAA="
    },
    "Metadata": {
     "aws:cdk:path": "LmsInfrastructureStack/CDKMetadata/Default"

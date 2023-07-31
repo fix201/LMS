@@ -4,7 +4,7 @@ mvn clean install
 #####################################################################################
 #                                Infrastructure                                     #
 #####################################################################################
-cd ../lms-infrastructure
+cd ./lms-infrastructure || exit
 cdk synth
 cdk deploy
 cdk destroy
@@ -13,7 +13,7 @@ cdk destroy
 #                                  Backend                                          #
 #####################################################################################
 # Build package
-cd ../lms-core
+cd ./lms-core || exit
 mvn clean package -P prod
 
 # Move package to cloud
